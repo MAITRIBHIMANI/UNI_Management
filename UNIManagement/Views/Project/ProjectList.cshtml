@@ -1,0 +1,138 @@
+﻿<div class=" d-flex flex-column flex-column-fluid" id="kt_content">
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <div id="kt_content_container" class="container-xxl">
+            <div class="row" id="filter">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" id="filterButton"> Filters </button>
+
+                        </div>
+                    </div>
+                    <div class="card text-center" id="filterCard" style="display:none">
+                        <div class="card-body pt-0">
+                            <form id="projectformfilter">
+                                <div class="row pt-10">
+                                    <div class="col-md-4">
+                                        <input type="text" name="filterprojectname" data-kt-customer-table-filter="search" class="form-control " placeholder="Project Name" />
+
+                        
+                                    </div>
+                                    <div class="col-md-4">
+                                       
+
+                                        <select name="filterbusinessnumber" class="form-select" data-allow-clear="true" tabindex="-1" id="ProjectBusinessfilter" asp-items="@(new SelectList(ViewBag.BusinessNumberDropDown,"BusinessNumber","BusinessNumber"))" data-control="select" data-placeholder="BusinessNumber">
+                                            <option value="">Business Number</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="date" class="form-control" name="filterarrivaldate" placeholder="Date" />
+                                    </div>
+                                </div>
+
+                                <div class="row text-end pt-5">
+                                    <div>
+                                        <div onclick="filterProjectList()" class="btn btn-primary">Search</div>
+
+                                        <a class="btn btn-danger" onclick="clearFilters()" href="javascript:void(0);"> Clear</a>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row pt-10">
+                <div class="col-md-12">
+                    <div class="card text-center">
+
+                        <div class="card-body pt-0">
+                            <div class="row pt-5">
+                                <div class="col-md-6 text-start pl-5">
+                                    <h1>Project List</h1>
+
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <a class="btn btn-primary" asp-controller="Project" asp-action="ProjectForm">Add Project</a>
+
+                                </div>
+
+                            </div>
+                            <div id="ProjectListPartialView">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+    <!--end::Post-->
+</div>
+<!--end::Content-->
+@section Scripts {
+    <script>
+        function fun1() {
+            if (confirm("Are you sure you want to delete?")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        document.getElementById('filterButton').addEventListener('click', function () {
+            var filterCard = document.getElementById('filterCard');
+            if (filterCard.style.display === 'none' || filterCard.style.display === '') {
+                filterCard.style.display = 'block';
+            } else {
+                filterCard.style.display = 'none';
+            }
+        });
+
+
+        filterProjectList();
+        function filterProjectList() {
+            debugger
+            $.ajax({
+                type: 'GET',
+                url: '/Project/GetProjectList',
+                data: $("#projectformfilter").serializeArray(),
+                success: function (response) {
+                    debugger
+                    $('#ProjectListPartialView').html(response);
+                },
+                error: function (req, status, err) {
+                    // Handle error during AJAX call
+
+                }
+            });
+        }
+
+
+        function clearFilters() {
+            $('#projectformfilter')[0].reset();
+            // document.getElementById("clientformfilter").reset();
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetProjectList", "Project")',
+                success: function (data) {
+                    // Update the table body with the returned partial view
+                    $('#ProjectListPartialView').html(data);
+                },
+                error: function (req, status, err) {
+                    console.error("Error: ", err);
+                    alert("An error occurred while fetching the project list.");
+                }
+            });
+        }
+
+
+    </script>
+}

@@ -1,0 +1,122 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<div class="d-flex flex-column flex-column-fluid" id="kt_content">
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <div id="kt_content_container" class="container-xxl">
+            <div class="row">
+                <table class="table border-dark">
+                    <tr>
+                        <td class="text-center">
+                            <label for="month">Select Month:</label>
+                            <select id="month" class="d-inline-block w-50 ml-2">
+                                <option value=''> --Select Month-- </option>
+                                <option value='0'>January</option>
+                                <option value='1'>February</option>
+                                <option value='2'>March</option>
+                                <option value='3'>April</option>
+                                <option value='4'>May</option>
+                                <option value='5'>June</option>
+                                <option value='6'>July</option>
+                                <option value='7'>August</option>
+                                <option value='8'>September</option>
+                                <option value='9'>October</option>
+                                <option value='10'>November</option>
+                                <option value='11'>December</option>
+                            </select>
+                        </td>
+                        <td class="align-middle">
+                            <label for="dropdownYear">Select Year:</label>
+                            <select id="dropdownYear" class="d-inline-block w-50 ml-2">
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row container mt-3">
+                <div id="currentmonthyear" class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>July-2024</h5>
+                </div>
+                <table id="attdancetable">
+                    <tbody>
+                        <tr id="rowofmonths"></tr>
+                        <tr id="daynames"></tr>
+                        <tr id="additionalRow" style="height:50px"></tr>
+                    </tbody>
+                </table>
+            </div>
+        @*     <div class="dropdown">
+                 <button onclick="myFunction()" class="dropbtn">Dropdown</button> 
+                <div id="myDropdown" class="dropdown-content">
+                    <a value="Present">Present</a>
+                    <a value="Leave">Leave</a>
+                    <a value="HalfLeave">HalfLeave</a>
+                </div>
+            </div> *@
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var i, currentYear, startYear, endYear, newOption, dropdownYear;
+        dropdownYear = document.getElementById("dropdownYear");
+        currentYear = (new Date()).getFullYear();
+        startYear = 2021;
+        endYear = currentYear;
+
+        for (i = startYear; i <= endYear; i++) {
+            newOption = document.createElement("option");
+            newOption.value = i;
+            newOption.label = i;
+            if (i == currentYear) {
+                newOption.selected = true;
+            }
+            dropdownYear.appendChild(newOption);
+        }
+        $('#attdancetable td').click(function () {
+
+            let date = $(this).index();
+            console.log(date);
+        });
+
+        $('#month, #dropdownYear').change(function () {
+            let year = $('#dropdownYear').val();
+            let month = $('#month').val();
+            generateCalendar(year, month);
+        });
+
+        function generateCalendar(year, month) {
+            let date = new Date(year, month);
+            let dayone = new Date(year, month, 1).getDay();
+            let lastdate = new Date(year, parseInt(month) + 1, 0).getDate();
+            let dayend = new Date(year, month, lastdate).getDay();
+            let dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+           
+            let lit = "";
+      
+            for (let i = 1; i <= lastdate; i++) {
+                let dayIndex = (dayone + i - 1) % 7;
+                lit += `<td class="border border-dark text-center"><a class="btn" value="${i}">${i}<br>${dayNames[dayIndex]}</a></td>`;
+
+             
+            }  
+            $("#rowofmonths").html(lit);
+            lit2 = "";
+            for (let i = 1; i <= lastdate; i++) {
+                lit2 += `<td class="border border-dark text-center"><a class="btn"></a></td>`;
+            }
+            $("#additionalRow").html(lit2);
+            let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            $("#currentmonthyear").html(`<th colspan="7">${monthNames[month]}-${year}</th>`);
+            $("#rowofmonths a").click(function () {
+                let value = $(this).attr('value');  
+                console.log(value);
+            });
+        }
+        generateCalendar(currentYear, new Date().getMonth());
+
+      
+    });
+  
+
+</script>
+    

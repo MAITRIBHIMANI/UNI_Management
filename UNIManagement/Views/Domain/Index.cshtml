@@ -1,0 +1,120 @@
+﻿ @model List<UNIManagement.Entities.ViewModel.DomainViewModel>
+<div class=" d-flex flex-column flex-column-fluid" id="kt_content">
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <div id="kt_content_container" class="container-xxl">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" id="filterButton"> Filters </button>
+                        </div>
+                    </div>
+                    <div class="card text-center" id="filterCard" style="display:none">
+                        <div class="card-body pt-0">
+                            <form id="domainformfilter">
+                                <div class="row pt-10">
+                                    <div class="col-md-4">
+                                        <input type="text" name="filterName" data-kt-customer-table-filter="search" class="form-control " placeholder="Domain Name" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select name="filterclientname" class="form-select" data-allow-clear="true" tabindex="-1" id="DomainClientfilter" asp-items="@(new SelectList(ViewBag.ClientDropDown,"Name","Name"))" data-control="select" data-placeholder="ClientName">
+                                            <option value="">
+                                              All Client
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input name="filterPurchaseDate" type="date" class="form-control" placeholder="Date" />
+                                    </div>
+                                </div>
+
+                                <div class="row pt-5 text-end">
+                                    <div>
+                                        <div onclick="filterDomainList()" class="btn btn-primary">Search</div>
+                                        <a class="btn btn-danger" onclick="clearFilters()" href="javascript:void(0);"> Clear</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row pt-10">
+                <div class="col-md-12">
+                    <div class="card text-center">
+                        <div class="card-body pt-0">
+                            <div class="row pt-5">
+                                <div class="col-md-6 text-start pl-5">
+                                    <h1>Domain List</h1>
+
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <a class="btn btn-primary" asp-controller="Domain" asp-action="DomainForm">Add Domain</a>
+                                </div>
+                                <!--begin::Add customer-->
+                                <!--end::Add customer-->
+                            </div>
+                            <div class="row pt-5">
+                                <div id="DomainListPartialView">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end::Post-->
+</div>
+
+
+@section Scripts{
+
+    <!--end::Content-->
+    <script>
+        document.getElementById('filterButton').addEventListener('click', function () {
+            var filterCard = document.getElementById('filterCard');
+            if (filterCard.style.display === 'none' || filterCard.style.display === '') {
+                filterCard.style.display = 'block';
+            } else {
+                filterCard.style.display = 'none';
+            }
+        });
+        filterDomainList();
+        function filterDomainList() {
+            debugger
+            $.ajax({
+                type: 'GET',
+                url: '/Domain/GetDomainList',
+                data: $("#domainformfilter").serializeArray(),
+                success: function (response) {
+                    debugger
+                    $('#DomainListPartialView').html(response); 
+                },
+                error: function (req, status, err) {
+                    // Handle error during AJAX call
+
+                }
+            });
+        }
+
+        function clearFilters() {
+            $('#domainformfilter')[0].reset();
+            // document.getElementById("clientformfilter").reset();
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetDomainList", "Domain")',
+                success: function (data) {
+                    // Update the table body with the returned partial view
+                    $('#DomainListPartialView').html(data);
+                },
+                error: function (req, status, err) {
+                    console.error("Error: ", err);
+                    alert("An error occurred while fetching the domain list.");
+                }
+            });
+        }
+
+    </script>
+}

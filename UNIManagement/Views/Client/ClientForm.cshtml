@@ -1,0 +1,178 @@
+﻿ @model UNIManagement.Entities.ViewModel.ClientViewModel;
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+<!--begin::Content-->
+<div class="container row">
+  
+   
+</div>
+<div class=" d-flex flex-column flex-column-fluid" id="kt_content">
+
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
+            <form asp-action="AddEdit" asp-controller="Client" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--begin::Card CLient-->
+                        <div class="card">
+                            <div class="card-header pt-5">
+                                <div class="col-md-6">
+                                    <h1>Client Details</h1>
+                                </div>
+                                <div class="col-md-6 text-end">
+                                   
+                                    <a class="btn rounded-2  border-primary" asp-controller="Client" asp-action="ClientList">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
+                                        </svg>Back
+                                    </a>
+                                </div>
+                            </div>
+                            <!--begin::Card body-->
+                            <div class="card-body pt-5">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <input type="hidden" asp-for="ClientId" class="form-control" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="Name">Name</label>
+                                        <input type="text" asp-for="Name" class="form-control" />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="Number"></label>
+                                        <input type="text" asp-for="Number" class="form-control" />
+                                        <span asp-validation-for="Number" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                      <div class="col-md-6">
+                                        <label asp-for="Email"></label>
+                                        <input type="email" asp-for="Email" class="form-control" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="BirthDate"></label>
+                                        <input type="date" asp-for="BirthDate" class="form-control" />
+                                        <span asp-validation-for="BirthDate" class="text-danger"></span>
+                                    </div>
+                                </div>                                                            
+                                <div class="row pt-5">                                   
+                                    <div class="col-md-12">
+                                        <label asp-for="Address"></label>
+                                        <textarea type="text" asp-for="Address" class="form-control" ></textarea>
+                                        <span asp-validation-for="Address" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                   <div class="row pt-5">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="kt_check_indeterminate_1" value="True" asp-for="IsActive" />
+                                        <label class="form-check-label" for="kt_check_indeterminate_1">
+                                            Is Active
+                                        </label>
+                                    </div>
+                                   </div>
+                             </div>
+                              
+                            </div>
+                            <!--end::Card body-->
+                        </div>
+                    <!--end::Card CLient-->
+                    </div>
+
+
+                <div class="row pt-5">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header pt-5">
+                                <h1>Business Details</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="row pt-5">
+                                    <div class="col-md-4">
+                                        <label asp-for="BusinessName"></label>
+                                        <input type="text" asp-for="BusinessName" class="form-control" />
+                                        <span asp-validation-for="BusinessName" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="BusinessNumber"></label>
+                                        <input type="number" asp-for="BusinessNumber" class="form-control" />
+                                        <span asp-validation-for="BusinessNumber" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="Category"></label>
+                                        <input type="text" asp-for="Category" class="form-control" />
+                                        <span asp-validation-for="Category" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                               <div class="row pt-5">
+                                   <div class="col-md-6">
+                                        <label asp-for="Additioninfo"></label>
+                                        <input type="file" asp-for="Additioninfo" class="form-control" />
+                                        <span asp-validation-for="Additioninfo" class="text-danger"></span>
+
+                                    </div>
+                                  
+                              
+                                        @if (Model != null && Model.AdditionInformation != null)
+                                        {
+                                        <img src="~/Client/AdditionalInformation/@Model.ClientId/@Model.AdditionInformation" alt="~/Client/AdditionalInformation/@Model.ClientId/@Model.AdditionInformation" />
+                                        }
+                                    
+                                  
+                                   
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row pt-5">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header pt-5">
+                                <h1>Refference Details</h1>
+                            </div>
+                            <div class="card-body">
+                              
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label asp-for="RefferenceDetails"></label>
+                                        <textarea type="text" id="editor1" asp-for="RefferenceDetails"></textarea>
+                                        <script>
+                                            ClassicEditor
+                                                .create(document.querySelector('#editor1'))
+                                                .then(editor1 => {
+                                                    console.log(editor1);
+                                                })
+                                                .catch(error => {
+                                                    console.error(error);
+                                                });
+                                        </script>
+                                    </div> 
+                                 
+                                </div>
+
+                                <div class="form-group pt-5 text-center">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              
+              </form>
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+</div>
+<!--end::Content-->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

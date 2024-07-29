@@ -1,0 +1,160 @@
+﻿ @model UNIManagement.Entities.ViewModel.TaskViewModel;
+
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+
+<!--begin::Content-->
+<div class="container row">
+
+    <div class="col-md-12 text-end">
+        <a class="btn btn-primary">Back</a>
+    </div>
+</div>
+<div class=" d-flex flex-column flex-column-fluid pt-2" id="kt_content">
+
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
+            <form asp-action="AddEdit" asp-controller="Task" method="post" enctype="multipart/form-data">
+                <input type="hidden" class="form-control" asp-for="TaskId" />
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--begin::Card CLient-->
+                        <div class="card">
+                            <div class="card-header pt-5">
+                                <div class="col-md-6">
+                                    <h1>Task Details</h1>
+                                </div>
+                            </div>
+                            <!--begin::Card body-->
+                            <div class="card-body pt-5">
+                                <div class="row">
+                                    <div class="form-group">
+                                        
+                                    </div>
+                                    <div class="col-md-4" >
+                                        <label>Project Name</label>
+                                            @*   <select class="form-select"  asp-for="ClientId" data-allow-clear="true" tabindex="-1"
+                                              asp-items="@(new SelectList(ViewBag.ClientDropDown,"ClientId","Name"))" data-control="select" 
+                                              data-placeholder="Client">
+                                            <option>Select a Client</option>
+                                        </select>  *@
+                                        <select class="form-select" id="projectId  " onchange="fnSetProjectName(this)" asp-for="ProjectId" data-allow-clear="true" tabindex="-1"                                        
+                                        asp-items="@(new SelectList(ViewBag.ProjectNameDropDown,"ProjectId","Name"))" data-control="select"
+                                        id="TaskProjectDropdown" data-placeholder="Project">
+                                            <option value="" >Select a Project Name</option>
+                                        </select>
+                                    <span asp-validation-for="ProjectId" class="text-danger"></span>
+
+
+                                    <input type="hidden" asp-for="ProjectName" id="projectName" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Employee Name</label>
+                                        <select class="form-select" onchange="fnSetEmployeeName(this)" asp-for="EmployeeId" data-allow-clear="true" tabindex="-1"
+                                                asp-items="@(new SelectList(ViewBag.EmployeeNameDropDown, "EmployeeId", "FirstName"))"
+                                                data-control="select" id="TaskEmployeeDropdown" data-placeholder="Employee">
+                                            <option value="" >Select an Employee</option>
+                                        </select>
+
+                                        <input type="hidden" asp-for="EmployeeName" id="employeeName" />
+                                    </div>                                   
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-12">
+                                        <label>Task Description</label>
+                                        <textarea type="text" id="editor1" asp-for="Description"></textarea>
+                                        <script>
+                                            ClassicEditor
+                                                .create(document.querySelector('#editor1'))
+                                                .then(editor1 => {
+                                                    console.log(editor1);
+                                                })
+                                                .catch(error => {
+                                                    console.error(error);
+                                                });
+                                        </script>
+                                    </div>
+
+                                </div>
+                              <div class="row pt-5">
+                                  <div class="col-md-12">
+                                        <label>File</label>
+                                        <input type="file" class="form-control" asp-for="Document"/>
+                                        <span class="text-danger"></span>
+                                        @{
+                                            if (Model != null && Model.Document != null)
+                                            {
+                                                <img src="@Model.Document" class="img-fluid" />
+                                            }
+                                        }
+                                  </div>
+                              </div>
+                              <div class="row pt-5">
+                                    <div class="col-md-6">
+                                        <label>Assign Date</label>
+                                        <input type="date" class="form-control" id="assignDate" asp-for="TaskAssignDate" onchange="validateDates()" />
+                                        <span class="text-danger" id="assignDateError"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Due Date</label>
+                                        <input type="date" class="form-control" id="dueDate" asp-for="DueDate" onchange="validateDates()" />
+                                        <span class="text-danger" id="dueDateError"></span>
+                                    </div>
+                              </div>
+                              <div class="row pt-5">
+                                    <div class="col-md-6">
+                                        <label>Status : </label>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="Status" value="Start" asp-for="Status">Start
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="Status" value="Pending" asp-for="Status">Pending
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="Status" value="End" asp-for="Status">End
+                                        </div>
+                                    </div>
+                              </div>
+                            </div>
+                            <div class="form-group mt-2 text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                        <!--end::Card body-->
+                    </div>
+                    <!--end::Card CLient-->
+                </div>
+            </form>
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+</div>
+<!--end::Content-->
+<script>
+    function fnSetProjectName(element){
+        console.log(element);
+        document.getElementById("projectName").value = element.options[element.selectedIndex].text;
+    }
+    function fnSetEmployeeName(element) {
+        console.log(element);
+        document.getElementById("employeeName").value = element.options[element.selectedIndex].text;
+    }
+    function validateDates() {
+        var assignDate = document.getElementById("assignDate").value;
+        var dueDate = document.getElementById("dueDate").value;
+        var assignDateError = document.getElementById("assignDateError");
+        var dueDateError = document.getElementById("dueDateError");
+
+        // Clear previous error messages
+        assignDateError.textContent = "";
+        dueDateError.textContent = "";
+
+        if (assignDate && dueDate) {
+            if (new Date(dueDate) < new Date(assignDate)) {
+                dueDateError.textContent = "Due Date cannot be before Assign Date.";
+            }
+        }
+    }
+</script>

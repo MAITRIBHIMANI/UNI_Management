@@ -1,0 +1,352 @@
+﻿@*@model UNI_MANAGE.Entities.ViewModel.NotificationViewModel
+
+<div class="card shadow-sm">
+    <form enctype="multipart/form-data"  id="addnotificationmodal" method="post">
+        <input type="hidden" />
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="name">Name</label>
+                    <input type="text" asp-for="Name" class="form-control form-control-solid" id="name" placeholder="Name" />
+                </div>
+                <div class="col-md-6">
+                    <label>Date</label>
+                    <input type="date" asp-for="Date" class="form-control" id="date" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <label class="form-label" for="NDoc">Choose File</label>
+                <input type="file" asp-for="NDoc" class="form-control" id="NDoc" />
+            </div>
+            <br /><br />
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" id="saveorupdatebtn" class="btn btn-primary">Save changes</button>
+        </div>
+    </form>
+</div>
+
+<script>
+   //$("#saveorupdatebtn").click(function (e) {
+   //    e.preventDefault();
+   //
+   //    var fileUpload = $("#NDoc").get(0);
+   //    var files = fileUpload.files;
+   //
+   //    var formData = new FormData();
+   //    formData.append("Name", $("#name").val());  
+   //    formData.append("Date", $("#date").val());  
+   //
+   //
+   //    for (var i = 0; i < files.length; i++) {
+   //        formData.append("NDoc", files[i]);
+   //    }
+   //
+   //    $.ajax({
+   //        type: 'POST',
+   //        url: 'notification/addedit',
+   //        data: formData,
+   //        processData: false,  
+   //        contentType: false,  // Set content type to false to send FormData
+   //        dataType: 'json',    // Expect JSON response from the server
+   //        success: function (data) {
+   //            console.log(data);
+   //            // Optionally perform additional actions upon successful update
+   //
+   //            // Reload the page or perform other actions as needed
+   //            // window.location.reload();
+   //        },
+   //        error: function (req, status, err) {
+   //            // Handle error during AJAX call
+   //            console.error(status, err.toString());
+   //        }
+   //    });
+   //
+   //    return false;
+   //});
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Check if a file is already uploaded (e.g., during edit)
+        var existingFile = "@Model.NDoc"; // Assuming Model.NDoc contains the filename or path
+
+        if (existingFile) {
+            displayFileInfo(existingFile); // Call function to display file info
+        }
+
+        $("#saveorupdatebtn").click(function (e) {
+            e.preventDefault();
+
+            var fileUpload = $("#NDoc").get(0);
+            var files = fileUpload.files;
+
+            var formData = new FormData();
+            formData.append("Name", $("#name").val());
+            formData.append("Date", $("#date").val());
+
+            for (var i = 0; i < files.length; i++) {
+                formData.append("NDoc", files[i]);
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: 'notification/addedit',
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    // Optionally perform additional actions upon successful update
+                    // Display uploaded file info if successful
+                    if (data.success && data.fileName) {
+                        displayFileInfo(data.fileName); // Call function to display file info
+                    }
+                    // window.location.reload();
+                },
+                error: function (req, status, err) {
+                    // Handle error during AJAX call
+                    console.error(status, err.toString());
+                }
+            });
+
+            return false;
+        });
+
+        // Function to display file information
+        function displayFileInfo(fileName) {
+            var fileInfoContainer = $("#fileInfo");
+            fileInfoContainer.html('<p>Uploaded File:  <a href="' + fileName + '" target="_blank">' + fileName + '</a></p>');
+        }
+    });
+</script>
+*@
+
+
+@*@model UNI_MANAGE.Entities.ViewModel.NotificationViewModel
+
+<div class="card shadow-sm">
+    <form enctype="multipart/form-data" id="addnotificationmodal" method="post">
+        <input type="hidden" />
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="name">Name</label>
+                    <input type="text" asp-for="Name" class="form-control form-control-solid" id="name" placeholder="Name" />
+                </div>
+                <div class="col-md-6">
+                    <label>Date</label>
+                    <input type="date" asp-for="Date" class="form-control" id="date" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <label class="form-label" for="NDoc">Choose File</label>
+                <input type="file" asp-for="NDoc" class="form-control" id="NDoc" multiple onchange="GetFileSize()"/>
+            </div>
+            <br /><br />
+            <div id="fileInfo"></div> <!-- Container to display file information -->
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" id="saveorupdatebtn" class="btn btn-primary">Save changes</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Function to populate form fields with data
+        function populateForm(data) {
+            $("#name").val(data.Name);
+            $("#date").val(data.Date);
+
+            // Assuming "NDoc" is a file path or name stored in NotificationViewModel
+            var existingFile = data.NDoc;
+            if (existingFile) {
+                displayFileInfo(existingFile); // Call function to display file info
+            }
+        }
+
+        // Function to display file information
+        function displayFileInfo(fileName) {
+            var fileInfoContainer = $("#fileInfo");
+            fileInfoContainer.html('<p>Uploaded File: <a href="' + fileName + '" target="_blank">' + fileName + '</a></p>');
+        }
+
+        // Edit button click handler (assuming it triggers fetching of data)
+        $("#editButton").click(function () {
+            // Replace 'fetchPreviousData()' with your method to fetch data for editing
+            fetchPreviousData(); // Call your method to fetch data for editing
+        });
+
+        // Simulated function to fetch previous data (replace with your actual logic)
+        function fetchPreviousData() {
+            // Mocking data for demonstration
+            var mockData = {
+                Name: "@Model.Name",
+                Date: "@Model.Date",
+                NDoc: "@Model.NDoc"  // Assuming NDoc holds file path or name
+            };
+
+            // Populate form with fetched data
+            populateForm(mockData);
+        }
+
+        $("#saveorupdatebtn").click(function (e) {
+            e.preventDefault();
+
+            var fileUpload = $("#NDoc").get(0);
+            var files = fileUpload.files;
+
+            var formData = new FormData();
+            formData.append("Name", $("#name").val());
+            formData.append("Date", $("#date").val());
+
+            for (var i = 0; i < files.length; i++) {
+                formData.append("NDoc", files[i]);
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: 'notification/addedit',
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    // Optionally perform additional actions upon successful update
+                    // Display uploaded file info if successful
+                    if (data.success && data.fileName) {
+                        displayFileInfo(data.fileName); // Call function to display file info
+                    }
+                    // window.location.reload();
+                },
+                error: function (req, status, err) {
+                    // Handle error during AJAX call
+                    console.error(status, err.toString());
+                }
+            });
+
+            return false;
+        });
+    });
+</script>
+*@
+
+@model UNI_MANAGE.Entities.ViewModel.NotificationViewModel
+
+<div class="card shadow-sm">
+    <form enctype="multipart/form-data" id="addnotificationmodal" method="post">
+        <input type="hidden" asp-for="NotificationId" id="Id" />
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="name">Name</label>
+                    <input type="text" asp-for="Name" class="form-control form-control-solid" id="name" placeholder="Name" />
+                </div>
+                <div class="col-md-6">
+                    <label>Date</label>
+                    <input type="date" asp-for="Date" class="form-control" id="date" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <label class="form-label" for="NDoc">Choose File</label>
+                <input type="file" asp-for="NDoc" class="form-control" id="NDoc" />
+            </div>
+            <br /><br />
+            <div id="fileInfo"></div> <!-- Container to display file information -->
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" id="saveorupdatebtn" class="btn btn-primary">Save changes</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        debugger
+        // Edit button click handler (assuming it triggers fetching of data)
+        $("#editButton").click(function () {
+            var notificationId = $(this).data('notification-id'); // Example: Extract notification ID from button data attribute
+            fetchPreviousData(notificationId); // Call your method to fetch data for editing
+        });
+
+        // Function to fetch previous data (replace with your actual logic
+        function fetchPreviousData(notificationId) {
+            debugger
+            $.ajax({
+                type: 'GET',
+                url: 'notification/ addedit',
+                data: { isEdit: '1', notificationId: notificationId },
+                dataType: 'json',
+                success: function (data) {
+                    populateForm(data); // Populate form with fetched data
+                },
+                error: function (req, status, err) {
+                    console.error(status, err.toString());
+                }
+            });
+        }
+
+        // Function to populate form fields with data
+        function populateForm(data) {
+            $("#Id").val(data.notificationId); // Assuming Id is part of your ViewModel
+            $("#name").val(data.Name);
+            $("#date").val(data.Date);
+
+            // Display file info if file exists
+            if (data.NDoc) {
+                displayFileInfo(data.NDoc); // Call function to display file info
+            }
+        }
+
+        // Function to display file information
+        function displayFileInfo(fileName) {
+            var fileInfoContainer = $("#fileInfo");
+            fileInfoContainer.html('<p>Uploaded File: <a href="' + fileName + '" target="_blank">' + fileName + '</a></p>');
+        }
+
+        // Form submission handler
+        $("#saveorupdatebtn").click(function (e) {
+            e.preventDefault();
+
+            var fileUpload = $("#NDoc").get(0);
+            var files = fileUpload.files;
+
+            var formData = new FormData($("#addnotificationmodal")[0]);
+
+            for (var i = 0; i < files.length; i++) {
+                formData.append("NDoc", files[i]);
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/notification/addedit',
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    // Optionally perform additional actions upon successful update
+                    // Display uploaded file info if successful
+                    if (data.success && data.fileName) {
+                        displayFileInfo(data.fileName); // Call function to display file info
+                    }
+                    // window.location.reload();
+                },
+                error: function (req, status, err) {
+                    // Handle error during AJAX call
+                    console.error(status, err.toString());
+                }
+            });
+
+            return false;
+        });
+    });
+</script>
+

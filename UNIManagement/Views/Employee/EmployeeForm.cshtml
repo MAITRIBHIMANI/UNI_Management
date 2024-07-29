@@ -1,0 +1,297 @@
+﻿@model UNIManagement.Entities.ViewModel.EmployeeDetailsViewModel;
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+
+<!--begin::Content-->
+
+<div class="d-flex flex-column flex-column-fluid" id="kt_content">
+
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
+            <form asp-action="AddEdit" asp-controller="Employee" method="post" enctype="multipart/form-data">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--begin::Card-->
+                        <div class="card">
+                            <div class="row p-5">
+                                <div class="col-md-6">
+                                    <h1>Employee Details</h1>
+                                </div>
+                                <div class="col-md-6 text-end">
+
+                                    <a class="btn rounded-2  border-primary" asp-controller="Employee" asp-action="index">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
+                                        </svg>Back
+                                    </a>
+                                </div>
+                            </div>
+                         
+                            <!--begin::Card body-->
+                            <div class="card-body pt-5">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <input type="hidden" asp-for="EmployeeId" class="form-control" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="FirstName">FirstName</label>
+                                        <input type="text" asp-for="FirstName" class="form-control" />
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="MiddleName">MiddleName</label>
+                                        <input type="text" asp-for="MiddleName" class="form-control" />
+                                        <span asp-validation-for="MiddleName" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="LastName">LastName</label>
+                                        <input type="text" asp-for="LastName" class="form-control" />
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-4">
+                                        <label asp-for="ContactNumber1">ContactNumber</label>
+                                        <input type="number" asp-for="ContactNumber1" class="form-control" />
+                                        <span asp-validation-for="ContactNumber1" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="ContactNumber2">AlternateNumber</label>
+                                        <input type="number" asp-for="ContactNumber2" class="form-control" />
+                                        <span asp-validation-for="ContactNumber2" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="Email">Email</label>
+                                        <input type="email" asp-for="Email" class="form-control" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-12">
+                                        <label asp-for="Address">Address</label>
+                                        <input type="text" asp-for="Address" class="form-control" />
+                                        <span asp-validation-for="Address" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-4">
+                                        <label asp-for="Country">Country</label>
+                                        <select class="form-select form-control" asp-for="Country">
+                                            <option>Select Country</option>
+                                            <option value="India">India</option>
+                                            <option value="USA">USA</option>
+                                            <option value="UK">UK</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="State">State</label>
+                                        <select class="form-select form-control" asp-for="State">
+                                            <option>Select State</option>
+                                            <option value="Gujrat">Gujrat</option>
+                                            <option value="Rajsthan">Rajsthan</option>
+                                            <option value="Maharastra">Maharastra</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label asp-for="Birthdate">BirthDate</label>
+                                        <input type="date" asp-for="Birthdate" class="form-control" />
+                                        <span asp-validation-for="Birthdate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-4">
+                                        <label asp-for="Education">Education</label>
+                                        <input type="text" asp-for="Education" class="form-control" />
+                                        <span asp-validation-for="Education" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label asp-for="EmployeeImage">EmployeeImage</label>
+                                        <input type="file" asp-for="EmployeeImage" class="form-control" />
+                                        <span asp-validation-for="EmployeeImage" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-6">
+                                        <label asp-for="Gender">Gender : </label>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="Gender" value="F" asp-for="Gender">Female
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="Gender" value="M" asp-for="Gender">Male
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="kt_check_indeterminate_1" value="True" asp-for="IsActive" />
+                                            <label class="form-check-label" for="kt_check_indeterminate_1">
+                                               Is Active
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--end::Card body-->
+                        </div>
+                        <!--end::Card-->
+                    </div>
+                </div>
+
+
+                <div class="row pt-5">
+                    <div class="col-md-12">
+                        <!--begin::Card-->
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body pt-5">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label asp-for="Joinningdate">Joinningdate</label>
+                                        <input type="date" asp-for="Joinningdate" class="form-control" />
+                                        <span asp-validation-for="Joinningdate" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6 pt-10 align-center" >
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="True" id="kt_check_indeterminate_1" asp-for="IsFresher" />
+                                            <label class="form-check-label" for="kt_check_indeterminate_1">
+                                                Fresher
+                                            </label>
+                                        </div>
+                                       
+                                    </div>
+
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-12">
+                                        <label asp-for="EmployeeResume">EmployeeResume</label>
+                                        <input type="file" asp-for="EmployeeResume" class="form-control" />
+                                        <span asp-validation-for="EmployeeResume" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-12">
+                                        <label asp-for="Bond"></label>
+                                        <textarea type="text" id="editor" asp-for="Bond"></textarea>
+                                        <script>
+                                            ClassicEditor
+                                                .create(document.querySelector('#editor'))
+                                                .then(editor => {
+                                                    console.log(editor);
+                                                })
+                                                .catch(error => {
+                                                    console.error(error);
+                                                });
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-4">
+                                        <label asp-for="Employeetype">Employeetype</label>
+                                        <select class="form-select form-control" asp-for="Employeetype">
+                                            <option>Select Employee Type</option>
+                                            <option value="Technical">Technical</option>
+                                            <option value="BDA">BDA</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--end::Card body-->
+                        </div>
+                        <!--end::Card-->
+                    </div>
+                </div>
+
+                <div class="row pt-5">
+                    <div class="col-md-12">
+                        <!--begin::Card-->
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body pt-5">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label asp-for="AdharCard">AdharCard</label>
+                                        <input type="file" asp-for="AdharCard" class="form-control" />
+                                        <span asp-validation-for="AdharCard" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="AdharNo">AdharNo</label>
+                                        <input type="text" asp-for="AdharNo" class="form-control" />
+                                        <span asp-validation-for="AdharNo" class="text-danger"></span>
+                                    </div>
+                                </div>
+                               
+                                <div class="row pt-5">
+                                    <div class="col-md-12">
+                                        <label asp-for="PassBook">PassBook</label>
+                                        <input type="file" asp-for="PassBook" class="form-control" />
+                                        <span asp-validation-for="PassBook" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-6">
+                                        <label asp-for="AccountNumber">AccountNumber</label>
+                                        <input type="text" asp-for="AccountNumber" class="form-control" />
+                                        <span asp-validation-for="AccountNumber" class="text-danger"></span>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="BankName">BankName</label>
+                                        <input type="text" asp-for="BankName" class="form-control" />
+                                        <span asp-validation-for="BankName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-6">
+                                        <label asp-for="Ifsc">Ifsc</label>
+                                        <input type="text" asp-for="Ifsc" class="form-control" />
+                                        <span asp-validation-for="Ifsc" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label asp-for="Upi">Upi</label>
+                                        <input type="text" asp-for="Upi" class="form-control" />
+                                        <span asp-validation-for="Upi" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="row pt-5">
+                                    <div class="col-md-6">
+                                        <label asp-for="Degree">Degree</label>
+                                        <input type="file" asp-for="Degree" class="form-control" />
+                                        <span asp-validation-for="Degree" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="Marksheet">Marksheet</label>
+                                        <input type="file" asp-for="Marksheet" class="form-control" />
+                                        <span asp-validation-for="Marksheet" class="text-danger"></span>
+                                    </div>
+                                </div>
+                               
+                                <div class="row pt-5">
+                                    <div class="col-md-12">
+                                        <label asp-for="otherdocument">OtherDocument</label>
+                                        <input type="file" asp-for="otherdocument" class="form-control" />
+                                        <span asp-validation-for="otherdocument" class="text-danger"></span>
+                                    </div>
+                                </div>
+                              
+                                <div class="form-group pt-5 text-center">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                            <!--end::Card body-->
+                        </div>
+                        <!--end::Card-->
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+</div>
+<!--end::Content-->

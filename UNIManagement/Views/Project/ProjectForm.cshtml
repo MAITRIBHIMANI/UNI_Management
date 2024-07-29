@@ -1,0 +1,166 @@
+﻿@model UNIManagement.Entities.ViewModel.ProjectDetailsViewModel;
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+
+<!--begin::Content-->
+<div class="container row">
+
+    <div class="col-md-12 text-end">
+        <a class="btn btn-primary">Back</a>
+    </div>
+</div>        
+<div class=" d-flex flex-column flex-column-fluid pt-2" id="kt_content">
+
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
+            <form asp-action="AddEdit" asp-controller="Project" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--begin::Card CLient-->
+                        <div class="card">
+                            <div class="card-header pt-5">
+                                <div class="col-md-6">
+                                    <h1>Project Details</h1>
+                                </div>
+                            </div>
+                            <!--begin::Card body-->
+                            <div class="card-body pt-5">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" asp-for="ProjectId" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Project Name</label>
+                                        <input type="text" asp-for="Name" class="form-control" />
+                                        <span class="text-danger" asp-validation-for="Name"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Client </label>
+                                       <select class="form-select"  asp-for="ClientId" data-allow-clear="true" tabindex="-1" asp-items="@(new SelectList(ViewBag.ClientDropDown,"ClientId","Name"))" data-control="select" data-placeholder="Client">
+                                            <option>Select a Client</option>
+                                        </select> 
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Domain </label>
+
+                                      
+                                        <select class="form-select" asp-for="DomainId" data-allow-clear="true" tabindex="-1" asp-items="@(new SelectList(ViewBag.DomainDropDown,"DomainId","Name"))" data-control="select" data-placeholder="Domain">
+                                            <option>Select a Domain</option>
+                                        </select>
+                                      
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-6">
+                                        <label>Arrival Date</label>
+                                        <input type="date" class="form-control" id="arrivaldate" asp-for="ArrivalDate" onchange="validateDates()" />
+                                        <span class="text-danger" asp-validation-for="ArrivalDate" id="arrivaldateError"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Commitment Date</label>
+                                        <input type="date" class="form-control" id="commitmentdate" asp-for="CommitmentDate" onchange="validateDates()" />
+                                        <span class="text-danger" asp-validation-for="CommitmentDate" id="commitmentdateError"></span>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-6">
+                                        <label>Git Repo</label>
+                                        <input type="text" class="form-control" asp-for="GitRepo" />
+                                        <span class="text-danger" asp-validation-for="GitRepo"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Business Number</label>
+                                        <select class="form-select" asp-for="BusinessNumber" data-allow-clear="true" tabindex="-1" asp-items="@(new SelectList(ViewBag.BusinessNumberDropDown,"BusinessNumber","BusinessNumber"))" data-control="select" >
+                                            <option>Select a Business Number</option>
+                                        </select>
+                                     
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+
+                                    <label>Add Documents</label>
+                                    <input type="file" class="form-control" asp-for="Projectdocument" />
+                                    <span class="text-danger" asp-validation-for="Projectdocument"></span>
+
+
+
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-12">
+
+
+                                        <label asp-for="DocDescription"></label>
+                                        <textarea type="text" id="editor" asp-for="DocDescription"></textarea>
+                                        <script>
+                                            ClassicEditor
+                                                .create(document.querySelector('#editor'))
+                                                .then(editor => {
+                                                    console.log(editor);
+                                                })
+                                                .catch(error => {
+                                                    console.error(error);
+                                                });
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="col-md-12">
+
+
+                                        <label asp-for="AdditionalInformation"></label>
+                                        <textarea type="text" id="editor2" asp-for="AdditionalInformation"></textarea>
+                                        <script>
+                                            ClassicEditor
+                                                .create(document.querySelector('#editor2'))
+                                                .then(editor2 => {
+                                                    console.log(editor2);
+                                                })
+                                                .catch(error => {
+                                                    console.error(error);
+                                                });
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="row pt-5">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="kt_check_indeterminate_1" value="True" asp-for="IsActive" />
+                                        <label class="form-check-label" for="kt_check_indeterminate_1">
+                                            Is Active
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-2 text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                        <!--end::Card body-->
+                    </div>
+                    <!--end::Card CLient-->
+                </div>
+            </form>
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Post-->
+</div>
+<!--end::Content-->
+<script>
+    function validateDates() {
+        var assignDate = document.getElementById("arrivaldate").value;
+        var dueDate = document.getElementById("commitmentdate").value;
+        var assignDateError = document.getElementById("arrivaldateError");
+        var dueDateError = document.getElementById("commitmentdateError");
+
+        // Clear previous error messages
+        assignDateError.textContent = "";
+        dueDateError.textContent = "";
+
+        if (assignDate && dueDate) {
+            if (new Date(dueDate) < new Date(assignDate)) {
+                dueDateError.textContent = "Due Date cannot be before Arrival Date.";
+            }
+        }
+    }
+</script>

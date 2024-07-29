@@ -1,0 +1,21 @@
+﻿ @model UNIManagement.Entities.ViewModel.TaskViewModel;
+ @using System.Net
+
+<div class="text-start">
+    <p>TaskId : @Model.TaskId</p>
+    <p>TokenNumber : @Model.TokenNumber</p>
+    <p>ProjectId : @Model.ProjectId</p>
+    <p>ProjectName : @Model.ProjectName</p>
+    <p>ClientId : @Model.ClientId</p>
+    <p>EmployeeId : @Model.EmployeeId</p>
+    <p>Employee Name :  @Model.EmployeeName </p>
+    <p>Document : @Model.Document</p>
+    <p>TaskAssignDate : @Model.TaskAssignDate</p>
+    <p>DueDate : @Model.DueDate</p>
+    <p>Status : @Model.Status</p>
+    <p>Description: @Html.Raw(WebUtility.HtmlDecode(Model.Description)) </p>
+   
+</div>
+@* 
+
+Helooo *@

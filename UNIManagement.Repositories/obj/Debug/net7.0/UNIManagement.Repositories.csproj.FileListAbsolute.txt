@@ -1,0 +1,69 @@
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.deps.json
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.runtimeconfig.json
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.dll
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.pdb
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Entities.dll
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Entities.pdb
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.csproj.AssemblyReference.cache
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.AssemblyInfoInputs.cache
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.AssemblyInfo.cs
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.csproj.CoreCompileInputs.cache
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManag.3E552142.Up2Date
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.dll
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\refint\UNIManagement.Repositories.dll
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.pdb
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.genruntimeconfig.cache
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\ref\UNIManagement.Repositories.dll
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.deps.json
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.runtimeconfig.json
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.dll
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.pdb
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Entities.dll
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Entities.pdb
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.csproj.AssemblyReference.cache
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.AssemblyInfoInputs.cache
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.AssemblyInfo.cs
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.csproj.CoreCompileInputs.cache
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManag.3E552142.Up2Date
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.dll
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\refint\UNIManagement.Repositories.dll
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.pdb
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.genruntimeconfig.cache
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\ref\UNIManagement.Repositories.dll
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.deps.json
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.runtimeconfig.json
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.dll
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.pdb
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Entities.dll
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Entities.pdb
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.csproj.AssemblyReference.cache
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.AssemblyInfoInputs.cache
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.AssemblyInfo.cs
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.csproj.CoreCompileInputs.cache
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManag.3E552142.Up2Date
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.dll
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\refint\UNIManagement.Repositories.dll
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.pdb
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.genruntimeconfig.cache
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\ref\UNIManagement.Repositories.dll
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.deps.json
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.runtimeconfig.json
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.dll
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Repositories.pdb
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Entities.dll
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\bin\Debug\net7.0\UNIManagement.Entities.pdb
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.csproj.AssemblyReference.cache
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.AssemblyInfoInputs.cache
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.AssemblyInfo.cs
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.csproj.CoreCompileInputs.cache
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManag.3E552142.Up2Date
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.dll
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\refint\UNIManagement.Repositories.dll
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.pdb
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.genruntimeconfig.cache
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\ref\UNIManagement.Repositories.dll
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.sourcelink.json

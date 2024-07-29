@@ -1,0 +1,76 @@
+﻿@model UNIManagement.Entities.ViewModel.NotificationViewModel
+
+<div class="card shadow-sm">
+    <form enctype="multipart/form-data" id="notificationform" method="post">
+        <input type="hidden" asp-for="NotificationId" />
+        <div class="card-body">
+            <div class="row">
+                <label for="Name">Name</label>
+                <input asp-for="Name" type="text" class="form-control form-control-solid" placeholder="Name" id="Name" />
+            </div>
+            <div class="row pt-2">
+                <label for="Date">Date</label>
+                <input asp-for="Date" type="date" class="form-control" id="Date" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="row pt-2">
+                <label for="Duration">Duration</label>
+                <input asp-for="Duration" type="text" class="form-control" id="Duration" />
+                <span class="text-danger"></span>
+            </div>
+            @* <div class="row pt-2">
+                <div class="col-md-6">
+                    <input type="checkbox" asp-for="IsActive" value=""/>
+                    <label>Status</label>
+                </div>
+            </div> *@
+            <div class="row pt-2">
+                <label class="form-label" for="DocumentFile">Choose File</label>
+                <input asp-for="DocumentFile" type="file" class="form-control" id="DocumentFile" />
+            </div>
+            <div class="row pt-2">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                <div class="col-md-6">              
+                    <button type="button" onclick="funnoti()" id="saveorupdatebtn" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    function funnoti() {
+        debugger
+        var formData = new FormData($("#notificationform")[0]);
+        $.ajax({
+            type: 'POST',
+            url: '/notification/addedit',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                console.log(data);
+                // Perform additional actions upon successful update
+            },
+            error: function (req, status, err) {
+                console.error('Error: ', err);
+                // Handle error during AJAX call
+            }
+        });
+    }
+</script>
+@section Scripts {
+
+
+<script>
+ 
+        $(document).ready(function () {
+            $("#saveorupdatebtn").click(function (e) {
+                
+                e.preventDefault();
+               
+            });
+        });
+</script>
+}

@@ -1,0 +1,162 @@
+﻿ @model List<UNIManagement.Entities.ViewModel.ClientViewModel>
+<div class=" d-flex flex-column flex-column-fluid" id="kt_content">
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <div id="kt_content_container" class="container-xxl">           
+            <div class="row" id="filter">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" id="filterButton"> Filters </button>
+                        </div>
+                    </div>
+                    <div class="card text-center" id="filterCard" style="display:none">
+                        <div class="card-body pt-0">
+                            <form id="clientformfilter">
+                            <div class="row pt-10">
+                                <div class="col-md-4">
+                                    <input type="text" name="filterName" data-kt-customer-table-filter="search" class="form-control " placeholder="Client Name" />
+                                </div>
+                                <div class="col-md-4">
+
+                                        <select name="filterBusinessName" class="form-select" data-allow-clear="true" tabindex="-1" id="ProjectBusinessfilter" asp-items="@(new SelectList(ViewBag.BusinessNameDropDown,"BusinessName","BusinessName"))" data-placeholder="BusinessName">
+                                            <option value="">All BusinessName</option>                                           
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <input name="filterBirthDate" type="date" class="form-control" placeholder="Date"  />
+                                </div>
+                            </div>
+
+                            <div class="row text-end pt-5">
+                                <div>
+                                     <div onclick="filterClientList()" class="btn btn-primary">Search</div>
+                                        <a class="btn btn-danger" onclick="clearFilters()" href="javascript:void(0);"> Clear</a>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form id="filterfromstatus">             
+
+                <div class="row">
+                    <a>
+                       
+                        <span class="badge bg-danger" name="Disable" onclick="filterClientByStatus()">Disable</span>
+                    </a>
+
+                </div>
+                <div class="row">
+                    <a>
+                        <span class="badge bg-success" name="Active" onclick="filterClientByStatus()">Active</span>
+
+                    </a>
+                </div>
+            </form>
+           
+            <div class="row pt-10">
+                <div class="col-md-12">
+                    <div class="card text-center">
+
+                        <div class="card-body pt-0">
+                            <div class="row pt-5">
+                                <div class="col-md-6 text-start pl-5">
+                                    <h1>Client List</h1>
+
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <a class="btn btn-primary" asp-controller="Client" asp-action="ClientForm">Add Client</a>
+
+                                </div>
+                               
+                            </div>
+                            <div class="row pt-5">
+                                <div id="ClientListPartialView">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+    <!--end::Post-->
+</div>
+<!--end::Content-->
+@section Scripts {
+
+<script>
+    function fun1() {
+        if (confirm("Are you sure you want to delete?")) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    document.getElementById('filterButton').addEventListener('click', function () {
+        var filterCard = document.getElementById('filterCard');
+        if (filterCard.style.display === 'none' || filterCard.style.display === '') {
+            filterCard.style.display = 'block';
+        } else {
+            filterCard.style.display = 'none';
+             
+        }
+    });
+        function clearFilters() {
+            $('#clientformfilter')[0].reset();
+            // document.getElementById("clientformfilter").reset();
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetClientList", "Client")',
+                success: function (data) {
+                    // Update the table body with the returned partial view
+                    $('#ClientListPartialView').html(data);
+                },
+                error: function (req, status, err) {
+                    console.error("Error: ", err);
+                    alert("An error occurred while fetching the client list.");
+                }
+            });
+        }
+   
+    filterClientList();
+        function filterClientList() {
+        debugger
+        $.ajax({
+            type: 'GET',
+            url: '/Client/GetClientList',
+            data: $("#clientformfilter").serializeArray(),
+            success: function (response) {
+                debugger
+                $('#ClientListPartialView').html(response);
+            },
+            error: function (req, status, err) {
+                // Handle error during AJAX call
+
+            }
+        });
+    }
+    function filterClientByStatus() {
+        d$.ajax({
+            type:'GET',
+                url: '/Client/GetClientList',
+                data: $("#filterfromstatus").serializeArray(),
+                success: function (response) {
+                    debugger
+                    $('#ClientListPartialView').html(response);
+                },
+                error: function (req, status, err) {
+                    // Handle error during AJAX call
+
+                }
+        });
+    }
+</script>
+
+    }

@@ -1,0 +1,57 @@
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.deps.json
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.runtimeconfig.json
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.dll
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.pdb
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.csproj.AssemblyReference.cache
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.AssemblyInfoInputs.cache
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.AssemblyInfo.cs
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.csproj.CoreCompileInputs.cache
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.dll
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\refint\UNIManagement.Entities.dll
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.pdb
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.genruntimeconfig.cache
+C:\Users\MAITRI BHIMANI\source\repos\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\ref\UNIManagement.Entities.dll
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.deps.json
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.runtimeconfig.json
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.dll
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.pdb
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.csproj.AssemblyReference.cache
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.AssemblyInfoInputs.cache
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.AssemblyInfo.cs
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.csproj.CoreCompileInputs.cache
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.dll
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\refint\UNIManagement.Entities.dll
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.pdb
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.genruntimeconfig.cache
+C:\Users\Dell\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\ref\UNIManagement.Entities.dll
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.deps.json
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.runtimeconfig.json
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.dll
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.pdb
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.csproj.AssemblyReference.cache
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.GeneratedMSBuildEditorConfig.editorconfig
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.AssemblyInfoInputs.cache
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.AssemblyInfo.cs
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.csproj.CoreCompileInputs.cache
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.dll
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\refint\UNIManagement.Entities.dll
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.pdb
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.genruntimeconfig.cache
+D:\Downloads\UNIManagement\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\ref\UNIManagement.Entities.dll
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.deps.json
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.runtimeconfig.json
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.dll
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\bin\Debug\net7.0\UNIManagement.Entities.pdb
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.csproj.AssemblyReference.cache
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.GeneratedMSBuildEditorConfig.editorconfig
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.AssemblyInfoInputs.cache
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.AssemblyInfo.cs
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.csproj.CoreCompileInputs.cache
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.dll
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\refint\UNIManagement.Entities.dll
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.pdb
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.genruntimeconfig.cache
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\ref\UNIManagement.Entities.dll
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.sourcelink.json
