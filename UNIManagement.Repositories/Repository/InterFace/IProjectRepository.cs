@@ -16,7 +16,7 @@ namespace UNIManagement.Repositories.Repository.InterFace
 
         void AddProject(ProjectDetailsViewModel model);    
         public ProjectDetailsViewModel GetProjectDetails(int id);
-        IEnumerable<ProjectDetailsViewModel> GetProjectListfilter(string filterprojectname, string filterbusinessnumber, DateTime? filterarrivaldate);
+        List<ProjectDetailsViewModel> GetProjectListfilter(string filterprojectname, string filterbusinessnumber, DateTime? filterarrivaldate, string filterIsActive);
 
         
     }

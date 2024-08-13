@@ -19,7 +19,7 @@ namespace UNIManagement.Entities.ViewModel
         public string GitRepo { get; set; }
         public string AdditionalInformation { get; set; }
    
-     public string BusinessNumber {  get; set; }
+     public string BusinessName {  get; set; }
 
 
     }

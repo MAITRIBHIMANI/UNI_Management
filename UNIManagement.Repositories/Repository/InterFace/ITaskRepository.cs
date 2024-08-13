@@ -16,7 +16,7 @@ namespace UNIManagement.Repositories.Repository.InterFace
         public void UpdateTask(TaskViewModel model);
         public TaskViewModel GetTaskDetails(int TaskId);
 
-      
+       
         List<TaskViewModel> GetTaskListfilter(string filtertokennumber, string filtleremployeename, string filterprojectname, string filterstatus, DateTime? filterdate );
 
     }

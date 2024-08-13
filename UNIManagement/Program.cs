@@ -14,7 +14,8 @@ builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<INotificationRepository, NoticationRepository>();
 builder.Services.AddScoped<ITaskRepository, TaskRepository>();
-
+builder.Services.AddScoped<IAttandanceRepository, AttandanceRepository>();
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,7 +26,9 @@ if (!app.Environment.IsDevelopment())
 	app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -34,6 +37,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}");
+	pattern: "{controller=Home}/{action=Index}/{Id?}");
 
 app.Run();

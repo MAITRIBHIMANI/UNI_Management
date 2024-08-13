@@ -13,7 +13,7 @@ namespace UNIManagement.Entities.ViewModel
         public int ProjectId { get; set; }
         public string Name { get; set; }
         public string Document {  get; set; }
-        public IFormFile Projectdocument { get; set; }
+        public IFormFile? Projectdocument { get; set; }
         public string DocDescription { get; set; }
         public string Description { get; set; }
         public string BusinessNumber {  get; set; }

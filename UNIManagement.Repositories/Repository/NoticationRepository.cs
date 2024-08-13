@@ -15,25 +15,27 @@ namespace UNIManagement.Repositories.Repository
 {
     public class NoticationRepository : INotificationRepository
     {
-
+        #region Constructor
         private readonly ApplicationDbContext _context;
         public NoticationRepository(ApplicationDbContext context)
         {
             _context = context;
         }
+        #endregion
+
         #region List
         public List<NotificationViewModel> GetNotificationList()
         {
-            return _context.Notifications.Where(x => x.IsDeleted == false).Select(cont => new NotificationViewModel()
-            {
-                NotificationId = cont.NotificationId,
-                Name = cont.Name,
-                Document = cont.Document,
-                Date = cont.Date,
-                Duration = cont.Duration,
-            }
-            ).ToList();
-
+            return _context.Notifications
+                           .Where(x => x.IsDeleted == false)
+                           .Select(cont => new NotificationViewModel()
+                           {
+                               NotificationId = cont.NotificationId,
+                               Name = cont.Name,
+                               Document = cont.Document,
+                               Date = cont.Date,
+                               Duration = cont.Duration,
+                           }).ToList();
         }
 
         #endregion
@@ -42,11 +44,12 @@ namespace UNIManagement.Repositories.Repository
         /// <summary>
         /// Delete Emplyoee details from database on EmployeeId
         /// </summary>
-        /// <param name="id"></param>
         /// <returns></returns>
         public async Task DeleteNotificationAsync(int id)
         {
-            Notification d = await _context.Notifications.Where(x => x.NotificationId == id).FirstOrDefaultAsync();
+            Notification? d = await _context.Notifications
+                                            .Where(x => x.NotificationId == id)
+                                            .FirstOrDefaultAsync();
             if (d != null)
             {
                 d.IsDeleted = true;
@@ -60,22 +63,21 @@ namespace UNIManagement.Repositories.Repository
         /// <summary>
         /// Retive Data From Notification Data Based On NotificationsId
         /// </summary>
-        /// <param name="NotificationsId"></param>
         /// <returns></returns>
         public NotificationViewModel? GetNotificationsByNotificationsId(int NotificationsId)
         {
             return _context.Notifications
-                   .Where(x => x.NotificationId == NotificationsId)
-                   .Select(cont => new NotificationViewModel
-                   {
-                       NotificationId = cont.NotificationId,
-                       Name = cont.Name,
-                       Document = cont.Document,
-                       Date = cont.Date,
-                       IsActive=cont.IsActive,
-                       Duration = cont.Duration,
+                           .Where(x => x.NotificationId == NotificationsId)
+                           .Select(cont => new NotificationViewModel
+                           {
+                               NotificationId = cont.NotificationId,
+                               Name = cont.Name,
+                               Document = cont.Document,
+                               Date = cont.Date,
+                               IsActive = cont.IsActive,
+                               Duration = cont.Duration,
 
-                   }).FirstOrDefault();
+                           }).FirstOrDefault();
         }
 
         #endregion
@@ -86,29 +88,27 @@ namespace UNIManagement.Repositories.Repository
             try
             {
                 var Notification = new Notification();
-                
-                Notification.Name = model.Name;               
+
+                Notification.Name = model.Name;
                 Notification.Date = model.Date;
                 Notification.Duration = model.Duration;
                 Notification.IsActive = model.IsActive;
                 Notification.Created = DateTime.Now;
-                Notification.IsActive= model.IsActive;
+                Notification.IsActive = model.IsActive;
                 _context.Notifications.Add(Notification);
                 _context.SaveChanges();
-                Notification.Document= model.Document;
-               Notification.IsDeleted =false;
-                Notification.Document = Helper.Doc(model.DocumentFile, Notification.NotificationId, "Notification", "Document.pdf");
-
+                Notification.Document = model.Document;
+                Notification.IsDeleted = false;
+                Notification.Document = Helper.UploadFile(model.DocumentFile, Notification.NotificationId, "Notification", "Document.pdf");
                 Notification.CreatedBy = Notification.NotificationId;
-                  _context.SaveChanges();
+                _context.SaveChanges();
+                Notification.Modified = Notification.Created;
+                Notification.ModifiedBy = Notification.NotificationId;
             }
             catch (Exception e)
             {
                 return;
             }
-            
-          
-           
         }
         #endregion
 
@@ -116,7 +116,9 @@ namespace UNIManagement.Repositories.Repository
 
         public void UpdateNotification(NotificationViewModel model)
         {
-            Notification notification = _context.Notifications.Where(x => x.NotificationId == model.NotificationId).FirstOrDefault();
+            Notification? notification = _context.Notifications
+                                                 .Where(x => x.NotificationId == model.NotificationId)
+                                                 .FirstOrDefault();
             if (notification != null)
             {
                 notification.Name = model.Name;
@@ -125,8 +127,7 @@ namespace UNIManagement.Repositories.Repository
                 notification.IsActive = model.IsActive;
                 if (model.DocumentFile != null)
                 {
-                    notification.Document = Helper.Doc(model.DocumentFile, notification.NotificationId, "Notification", "Document.pdf");
-                   
+                    notification.Document = Helper.UploadFile(model.DocumentFile, notification.NotificationId, "Notification", "Document.pdf");
                 }
                 _context.Notifications.Update(notification);
                 _context.SaveChanges();

@@ -29,7 +29,7 @@ public partial class Project
     public string AdditionalInformation { get; set; } = null!;
 
     [Column(TypeName = "character varying")]
-    public string? BusinessNumber { get; set; }
+    public string? BusinessName { get; set; }
 
     [Column(TypeName = "character varying")]
     public string IsActive { get; set; } = null!;

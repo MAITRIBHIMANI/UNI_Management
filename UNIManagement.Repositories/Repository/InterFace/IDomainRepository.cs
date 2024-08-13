@@ -16,7 +16,7 @@ namespace UNIManagement.Repositories.Repository.InterFace
         public void UpdateDomain(DomainViewModel model);
 
         public DomainViewModel GetDomianDetails(int Id);
-        List<DomainViewModel> GetDomainListfilter(string filterName, string filterclientname, DateTime? filterPurchaseDate);
+        List<DomainViewModel> GetDomainListfilter(string filterName, int? filterclientname, DateTime? filterPurchaseDate, string filterIsActive);
 
     }
 }

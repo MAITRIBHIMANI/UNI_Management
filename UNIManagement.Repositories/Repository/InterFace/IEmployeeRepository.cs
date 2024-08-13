@@ -18,7 +18,8 @@ namespace UNIManagement.Repositories.Repository.InterFace
         public void AddEmployee(EmployeeDetailsViewModel model);
         public void UpdateEmployee(EmployeeDetailsViewModel model);
         public EmployeeDetailsViewModel GetEmployeeDetails(int EmployeeId);
-        List<EmployeeDetailsViewModel> GetEmployeeListfilter(string filterName, string filterType, DateTime? filterJoinningDate);
+        List<EmployeeDetailsViewModel> GetEmployeeListfilter(string filterName, string filterType, DateTime? filterJoinningDate, string filterIsActive);
+        List<Employee> isEmailExist(string Email);
 
     }
 }

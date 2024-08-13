@@ -15,11 +15,14 @@ namespace UNIManagement.Repositories.Repository
 {
     public class ProjectRepository : IProjectRepository
     {
+        #region Constructor
         private readonly ApplicationDbContext _context;
         public ProjectRepository(ApplicationDbContext context)
         {
             _context = context;
         }
+        #endregion
+
         #region List
         public List<ProjectDetailsViewModel> GetProjectList()
         {
@@ -32,81 +35,58 @@ namespace UNIManagement.Repositories.Repository
                           {
                               ProjectId = project.ProjectId,
                               Name = project.Name,
-                              BusinessNumber = project.BusinessNumber,
+                              BusinessName = project.BusinessName,
                               Document = ProjectAttachment.Document,
                               ArrivalDate = project.ArrivalDate,
                               CommitmentDate = project.CommitmentDate,
                               IsActive = project.IsActive,
-                          }).ToList();
+                              Modified = project.Modified,
+                          }).OrderByDescending(x => x.Modified).ToList();
 
             return result;
         }
 
-        public IEnumerable<ProjectDetailsViewModel> GetProjectListfilter(string filterprojectname, string filterbusinessnumber, DateTime? filterarrivaldate)
+        public List<ProjectDetailsViewModel> GetProjectListfilter(string filterprojectname, string filterbusinessnumber, DateTime? filterarrivaldate, string filterIsActive)
         {
-           
-            IEnumerable<ProjectDetailsViewModel> projectList = (from project in _context.Projects
-                               join projectWiseAttachment in _context.ProjectAttachments
-                                on project.ProjectId equals projectWiseAttachment.ProjectId into ProjectGrop
-                               from ProjectAttachment in ProjectGrop.DefaultIfEmpty()
-                               where (project.IsDeleted == false)  
-                                      
-                               select new ProjectDetailsViewModel
-                               {
-                                   ProjectId = project.ProjectId,
-                                   Name = project.Name,
-                                   BusinessNumber = project.BusinessNumber,
-                                   Document = ProjectAttachment.Document,
-                                   ArrivalDate = project.ArrivalDate,
-                                   CommitmentDate = project.CommitmentDate,
-                                   IsActive = project.IsActive,
-                               }).ToList();
 
-            if (!string.IsNullOrEmpty(filterprojectname))
-            {
-                projectList = projectList.Where(x => x.Name.ToLower().Contains(filterprojectname.ToLower()));
-            }
-            if (!string.IsNullOrEmpty(filterbusinessnumber))
-            {
-
-                projectList = projectList.Where(x => x.BusinessNumber.ToLower().Contains(filterbusinessnumber.ToLower()));
-            }
-
-            if (filterarrivaldate.HasValue)
-            {
-                projectList = projectList.Where(x => x.ArrivalDate == filterarrivaldate.Value);
-            }
+            List<ProjectDetailsViewModel> projectList = (from project in _context.Projects
+                                                         join projectWiseAttachment in _context.ProjectAttachments
+                                                         on project.ProjectId equals projectWiseAttachment.ProjectId into ProjectGrop
+                                                         from ProjectAttachment in ProjectGrop.DefaultIfEmpty()
+                                                         where (project.IsDeleted == false
+                                                                && (string.IsNullOrEmpty(filterprojectname) || project.Name.Trim().ToLower().Contains(filterprojectname.ToLower()))
+                                                                && (string.IsNullOrEmpty(filterbusinessnumber) || project.BusinessName.ToLower().Contains(filterbusinessnumber.ToLower()))
+                                                                && (!filterarrivaldate.HasValue || project.ArrivalDate == filterarrivaldate.Value))
+                                                                && (string.IsNullOrEmpty(filterIsActive) || project.IsActive.ToLower() == filterIsActive.ToLower())
+                                                         select new ProjectDetailsViewModel
+                                                         {
+                                                             ProjectId = project.ProjectId,
+                                                             Name = project.Name,
+                                                             BusinessName = project.BusinessName,
+                                                             Document = ProjectAttachment.Document,
+                                                             ArrivalDate = project.ArrivalDate,
+                                                             CommitmentDate = project.CommitmentDate,
+                                                             IsActive = project.IsActive,
+                                                         }).ToList();
             return projectList;
-
-
         }
 
         #endregion
 
-        #region ProjectAdd
-        /// <summary>
-        /// Emplkyuikiuk
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        /// 
-
+        #region ProjectAdd  
 
         public void AddProject(ProjectDetailsViewModel model)
         {
-            //Project
-
-
             try
             {
                 var Project = new Project();
                 Project.ClientId = model.ClientId;
-                Project.DomainId = model.DomainId;  
+                Project.DomainId = model.DomainId;
                 Project.Name = model.Name;
                 Project.ArrivalDate = model.ArrivalDate;
                 Project.CommitmentDate = model.CommitmentDate;
                 Project.GitRepo = model.GitRepo;
-                Project.BusinessNumber = model.BusinessNumber;
+                Project.BusinessName = model.BusinessName;
                 Project.AdditionalInformation = model.AdditionalInformation;
                 Project.IsActive = model.IsActive;
                 Project.IsDeleted = false;
@@ -114,30 +94,29 @@ namespace UNIManagement.Repositories.Repository
                 _context.Projects.Add(Project);
                 _context.SaveChanges();
                 Project.CreatedBy = Project.ProjectId;
+                Project.Modified = Project.Created;
+                Project.ModifiedBy = Project.ProjectId;
                 _context.SaveChanges();
-          
 
                 //ProjectAttachment
                 var projectattachment = new ProjectAttachment();
                 projectattachment.ProjectId = Project.ProjectId;
-                projectattachment.Document = Helper.Files(model.Projectdocument, Project.ProjectId, "Projct", "Document.pdf");
+                projectattachment.Document = Helper.UploadFile(model.Projectdocument, Project.ProjectId, "Projct", "Document.pdf");
                 projectattachment.DocDescription = model.DocDescription;
                 projectattachment.Created = DateTime.Now;
+                projectattachment.Modified = projectattachment.Created;
                 projectattachment.IsDeleted = false;
                 _context.ProjectAttachments.Add(projectattachment);
                 _context.SaveChanges();
                 projectattachment.CreatedBy = Project.ProjectId;
+                projectattachment.ModifiedBy = Project.ProjectId;
                 _context.SaveChanges();
-
             }
             catch (Exception e)
             {
                 return;
             }
-
-
         }
-
         #endregion
 
         #region Delete
@@ -148,7 +127,9 @@ namespace UNIManagement.Repositories.Repository
         /// <returns></returns>
         public async Task DeleteProjectsync(int id)
         {
-            Project d = await _context.Projects.Where(x => x.ProjectId == id).FirstOrDefaultAsync();
+            Project? d = await _context.Projects
+                                       .Where(x => x.ProjectId == id)
+                                       .FirstOrDefaultAsync();
             if (d != null)
             {
                 d.IsDeleted = true;
@@ -163,7 +144,9 @@ namespace UNIManagement.Repositories.Repository
         {
             try
             {
-                Project project = _context.Projects.Where(x => x.ProjectId == model.ProjectId).FirstOrDefault();
+                Project? project = _context.Projects
+                                           .Where(x => x.ProjectId == model.ProjectId)
+                                           .FirstOrDefault();
 
                 if (project != null)
                 {
@@ -172,7 +155,7 @@ namespace UNIManagement.Repositories.Repository
                     project.Name = model.Name;
                     project.ArrivalDate = model.ArrivalDate;
                     project.CommitmentDate = model.CommitmentDate;
-                    project.BusinessNumber = model.BusinessNumber;
+                    project.BusinessName = model.BusinessName;
                     project.GitRepo = model.GitRepo;
                     project.Modified = DateTime.Now;
                     project.ModifiedBy = model.ProjectId;
@@ -181,25 +164,29 @@ namespace UNIManagement.Repositories.Repository
                     _context.Projects.Update(project);
                     _context.SaveChanges();
 
-                    ProjectAttachment projectAttachment = _context.ProjectAttachments.Where(x => x.ProjectId == model.ProjectId).FirstOrDefault();
+                    ProjectAttachment? projectAttachment = _context.ProjectAttachments.Where(x => x.ProjectId == model.ProjectId).FirstOrDefault();
 
                     if (projectAttachment != null)
                     {
-                        projectAttachment.ProjectId = project.ProjectId;                       
-                        projectAttachment.Document = model.Document;
+                        projectAttachment.ProjectId = project.ProjectId;
+                        projectAttachment.Document = Helper.UploadFile(model.Projectdocument, projectAttachment.ProjectId, "Projct", "Document.pdf");
                         projectAttachment.DocDescription = model.DocDescription;
                         projectAttachment.Modified = DateTime.Now;
                         projectAttachment.ModifiedBy = model.ProjectId;
                         _context.ProjectAttachments.Update(projectAttachment);
                         _context.SaveChanges();
                     }
-                    Client client=_context.Clients.Where(x=>x.ClientId == model.ClientId).FirstOrDefault();
+                    Client? client = _context.Clients
+                                             .Where(x => x.ClientId == model.ClientId)
+                                             .FirstOrDefault();
                     if (client != null)
                     {
-                        client.ClientId=client.ClientId;
-                        client.Name=client.Name;
+                        client.ClientId = client.ClientId;
+                        client.Name = client.Name;
                     }
-                    Domain domain = _context.Domains.Where(x=>x.DomainId== model.DomainId).FirstOrDefault();
+                    Domain? domain = _context.Domains
+                                             .Where(x => x.DomainId == model.DomainId)
+                                             .FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -213,49 +200,37 @@ namespace UNIManagement.Repositories.Repository
 
             ProjectDetailsViewModel? ProjectDetails = (from prj in _context.Projects
                                                        join prjattach in _context.ProjectAttachments
-                                                       on prj.ProjectId equals prjattach.ProjectId into ProjectGroup
-                                                       from ProjectAttachment in ProjectGroup.DefaultIfEmpty()
-                                                     
+                                                       on id equals prjattach.ProjectId into ProjectGroup
+                                                       from prjattach in ProjectGroup.DefaultIfEmpty()
                                                        join c in _context.Clients
                                                        on prj.ClientId equals c.ClientId into clientGroup
                                                        from c in clientGroup.DefaultIfEmpty()
-
                                                        join d in _context.Domains
-                                                     on prj.DomainId equals d.DomainId into domainGroup
+                                                       on prj.DomainId equals d.DomainId into domainGroup
                                                        from d in domainGroup.DefaultIfEmpty()
-                                                       where prj.ProjectId == id && prj.ClientId == c.ClientId
-                                                       && prj.DomainId ==d.DomainId
+                                                       where prj.ProjectId == id
                                                        select new ProjectDetailsViewModel()
                                                        {
-                                                           ProjectId = prj.ProjectId,                                                           
-                                                           ClientId = (int)prj.ClientId,
+                                                           ProjectId = prj.ProjectId,
+                                                           Name = prj.Name,
+                                                           ClientId = prj.ClientId,
                                                            ClientName = c.Name,
-                                                           DomainId =(int)prj.DomainId,
-                                                           DomainName=d.DomainName,
+                                                           DomainId = prj.DomainId,
+                                                           DomainName = d.DomainName,
                                                            ArrivalDate = prj.ArrivalDate,
                                                            CommitmentDate = prj.CommitmentDate,
                                                            GitRepo = prj.GitRepo,
-                                                           BusinessNumber = prj.BusinessNumber,
+                                                           BusinessName = prj.BusinessName,
                                                            AdditionalInformation = prj.AdditionalInformation,
-                                                           DocDescription = ProjectAttachment.DocDescription,
-                                                           Document = ProjectAttachment.Document,
-                                                           Name = prj.Name,
+                                                           DocDescription = prjattach.DocDescription,
+                                                           Document = prjattach.Document,
                                                            IsActive = prj.IsActive,
-                                                           ProjectWiseAttachmentId = ProjectAttachment.ProjectAttachmentId,
-                                                           
+                                                           ProjectWiseAttachmentId = prjattach.ProjectAttachmentId,
+                                                           IsDeleted = prj.IsDeleted,
 
                                                        }).FirstOrDefault();
-
-
-
-
-
             return ProjectDetails;
         }
         #endregion
-
-
-
-
     }
 }

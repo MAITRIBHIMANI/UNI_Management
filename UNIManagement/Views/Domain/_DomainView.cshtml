@@ -7,8 +7,8 @@
     <p>Url : @Model.Url</p>
     <p>PurchaseDate : @Model.PurchaseDate</p>
     <p>RenewalDuration : @Model.RenewDuration</p>
-    <p>Platform : @Model.Platform </p>
-    <p>CredentialDetails : @Model.CredentialDetails</p>
+    <p>Platform : @Html.Raw(WebUtility.HtmlDecode(Model.Platform)) </p> 
+    <p>CredentialDetails :  @Html.Raw(WebUtility.HtmlDecode(Model.CredentialDetails))</p>
     <p>IsWorkShopPurchased : @Model.IsWorkshopPurchased</p>
     <p>WorkShopPurchasedDate : @Model.WorkspacePurchaseDate </p>
     <p>WorkShopRenewalDuration : @Model.WorkshpaceRenewDuration</p>
@@ -16,17 +16,7 @@
 
    
 
-    @*  <p>TokenNumber : @Model.TokenNumber</p>
-    <p>ProjectId : @Model.ProjectId</p>
-    <p>ProjectName : @Model.ProjectName</p>
-    <p>ClientId : @Model.ClientId</p>
-    <p>EmployeeId : @Model.EmployeeId</p>
-    <p>Employee Name :  @Model.EmployeeName </p>
-    <p>Document : @Model.Document</p>
-    <p>TaskAssignDate : @Model.TaskAssignDate</p>
-    <p>DueDate : @Model.DueDate</p>
-    <p>Status : @Model.Status</p>
-    <p>Description: @Html.Raw(WebUtility.HtmlDecode(Model.Description)) </p> *@
+   
 
 </div>
 @*

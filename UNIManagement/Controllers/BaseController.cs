@@ -17,7 +17,6 @@ namespace UNIManagement.Controllers
             return Content(html);
         }
 
-
         /// <summary>
         /// Get Current Route Name
         /// </summary>

@@ -268,7 +268,7 @@
 
 <script>
     $(document).ready(function () {
-        debugger
+        
         // Edit button click handler (assuming it triggers fetching of data)
         $("#editButton").click(function () {
             var notificationId = $(this).data('notification-id'); // Example: Extract notification ID from button data attribute
@@ -277,7 +277,7 @@
 
         // Function to fetch previous data (replace with your actual logic
         function fetchPreviousData(notificationId) {
-            debugger
+            
             $.ajax({
                 type: 'GET',
                 url: 'notification/ addedit',

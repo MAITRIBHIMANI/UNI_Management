@@ -17,6 +17,7 @@ namespace UNIManagement.Entities.ViewModel
         public string? ProjectName { get; set; }
         public int? ClientId { get; set; }
         public string? ClientName { get; set; }
+        [Required(ErrorMessage = "select employee")]
         public int EmployeeId { get; set; }
         public string? EmployeeName { get; set; }
         public string? Description { get; set; }
@@ -26,6 +27,7 @@ namespace UNIManagement.Entities.ViewModel
         public DateTime? DueDate { get; set; }
         public string? Status { get; set; }
         public bool IsDeleted { get; set; }
+        public string? IsActive { get; set; }
 
     }
 }

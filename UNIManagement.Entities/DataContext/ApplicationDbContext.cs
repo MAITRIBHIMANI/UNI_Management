@@ -26,6 +26,8 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<EmployeeAttachment> EmployeeAttachments { get; set; }
 
+    public virtual DbSet<EmployeeAttendance> EmployeeAttendances { get; set; }
+
     public virtual DbSet<EmployeeTask> EmployeeTasks { get; set; }
 
     public virtual DbSet<Notification> Notifications { get; set; }
@@ -67,6 +69,11 @@ public partial class ApplicationDbContext : DbContext
             entity.HasOne(d => d.Employee).WithMany(p => p.EmployeeAttachments)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_EmployeeAttachment_to_Employee");
+        });
+
+        modelBuilder.Entity<EmployeeAttendance>(entity =>
+        {
+            entity.HasKey(e => e.AttendanceId).HasName("EmployeeAttendance_pkey");
         });
 
         modelBuilder.Entity<EmployeeTask>(entity =>

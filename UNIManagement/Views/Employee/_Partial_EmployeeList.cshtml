@@ -1,78 +1,96 @@
 ﻿@model List<UNIManagement.Entities.ViewModel.EmployeeDetailsViewModel>
 
 <!--begin::Table-->
-<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
-    <!--begin::Table head-->
-    <thead>
-        <!--begin::Table row-->
-        <tr class="fw-bolder fs-7 text-uppercase gs-0">
-            <th class="min-w-80">No.</th>
-            <th class="min-w-125px">Name</th>
-            <th class="min-w-125px">Type</th>
-            <th class="min-w-125px">Number</th>
-            <th class="min-w-125px">Resume</th>
-            <th class="min-w-125px">Status</th>
-            <th class="text-center min-w-70px">Actions</th>
-        </tr>
-        <!--end::Table row-->
-    </thead>
-    <!--end::Table head-->
-    <!--begin::Table body-->
-  <tbody class="fw-bold text-gray-600">
-        @{
-            int i = 1;
-        }
-        @foreach (var b in Model)
-        {
-            <tr>
-                <td>@i</td>
-                <td>@b.FirstName</td>
-                <td>@b.Employeetype</td>
-                <td>@b.ContactNumber1</td>
-                <td>
-                    <a class="btn btn-primary" href="/Documents/Employee/@b.EmployeeId/Resume.pdf" target="_blank">Resume</a>
-                </td> 
-                @* <td>@b.Resume</td>*@
-                 <td>
-                    @if (b.IsActive == "false")
-                    {
-                        <span class="badge bg-danger">Disable</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-success">Active</span>
-                    }
-                </td>
-                <td class="text-center">
-                    <a href="javascript:void(0);" class="view-employee" data-employee-id="@b.EmployeeId" aria-label="View Employee">
-
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill text-primary" viewBox="0 0 16 16">
-                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
-                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
-                </svg>
-                </a>
-                     <a asp-controller="Employee" asp-action="Update" asp-route-id="@b.EmployeeId">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square text-success" viewBox="0 0 16 16">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-                        </svg>
-                    </a>
-
-                    <a asp-controller="Employee" asp-action="Delete" onclick="return fun1();" asp-route-id="@b.EmployeeId">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash  text-danger" viewBox="0 0 16 16">
-                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                        </svg>
-                    </a>
-                </td>
-
+@if (Model.Count < 1)
+{
+    <h1 class="text-center mt-3 text-secondary">No data Found</h1>
+}
+else
+{
+    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+        <!--begin::Table head-->
+        <thead>
+            <!--begin::Table row-->
+            <tr class="fw-bolder fs-7 text-uppercase gs-0">
+                <th class="min-w-80">No.</th>
+                <th class="min-w-125px">Name</th>
+                <th class="min-w-125px">Type</th>
+                <th class="min-w-125px">Number</th>
+                <th class="min-w-125px">Status</th>
+                <th class="text-center min-w-70px">Actions</th>
             </tr>
+            <!--end::Table row-->
+        </thead>
+        <!--end::Table head-->
+        <!--begin::Table body-->
+        <tbody class="fw-bold text-gray-600">
+            @{
+                int i = 1;
+            } 
+            @foreach (var b in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td> @(b.FirstName + " " + b.MiddleName + " " + b.LastName)
+                        @if (b.Birthdate.HasValue
+                       && (b.Birthdate.Value.Month == DateTime.Today.Month
+                       || b.Birthdate.Value.Month == DateTime.Today.AddDays(4).Month)
+                       && (b.Birthdate.Value.Day >= DateTime.Today.AddDays(-4).Day
+                       && b.Birthdate.Value.Day <= DateTime.Today.Day)
+                       )
+                        @* @if (b.Birthdate.HasValue && b.Birthdate.Value.Month == DateTime.Today.Month && (b.Birthdate.Value.Date >= DateTime.Today.Date && b.Birthdate.Value.Month == DateTime.Today.AddDays(2).Month) && (b.Birthdate.Value.Day >= DateTime.Today.AddDays(4).Day))      *@
+                        {
+                            <span>🎂</span>
+                        }              
+                    
+                    </td>
+                    <td>@b.Employeetype</td>
+                    <td>@b.ContactNumber1</td>
+                    <td>
+                        @if (b.IsActive == "false")
+                        {
+                            <span class="badge bg-danger">Disable</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success">Active</span>
+                        }
+                    </td>
+                    <td class="text-center">
+                        <a href="/Documents/Employee/@b.EmployeeId/Resume.pdf" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-arrow-down-fill  text-info" viewBox="0 0 16 16">
+                                <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0" />
+                            </svg>
+                        </a>
+                        <a href="javascript:void(0);" class="view-employee" data-employee-id="@b.EmployeeId" aria-label="View Employee">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill text-primary" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                            </svg>
+                        </a>
+                        <a asp-controller="Employee" asp-action="Update" asp-route-id="@b.EmployeeId">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square text-success" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                            </svg>
+                        </a>
 
-            i++;
-        }
-    </tbody> 
-    <!--end::Table body-->
-</table>
+                        <a asp-controller="Employee" asp-action="Delete" onclick="return fun1();" asp-route-id="@b.EmployeeId">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash  text-danger" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                            </svg>
+                        </a>
+                    </td>
+
+                </tr>
+
+                i++;
+            }
+        </tbody>
+        <!--end::Table body-->
+    </table>
+}
 <!--end::Table-->
 
 
@@ -121,8 +139,6 @@
                 }
             });
         }
-
-
     });
 </script>
 

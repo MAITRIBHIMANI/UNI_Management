@@ -14,7 +14,7 @@ namespace UNIManagement.Repositories.Repository.InterFace
         public void AddClient(ClientViewModel model);
         public void UpdateClient(ClientViewModel model);
         public ClientViewModel GetClientDetails(int Id);
-        List<ClientViewModel> GetClientListfilter(string filterName, string filterBusinessName, DateTime? filterBirthDate);
+        List<ClientViewModel> GetClientListfilter(string filterName, string filterBusinessName, DateTime? filterBirthDate, string filterIsActive);
   
       
     }

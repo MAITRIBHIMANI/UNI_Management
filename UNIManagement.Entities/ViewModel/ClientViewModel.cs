@@ -13,37 +13,56 @@ namespace UNIManagement.Entities.ViewModel
 {
     public class ClientViewModel
     {
-        public int ClientId { get; set; }
-        [Required(ErrorMessage = "Please enter your name"), MaxLength(50)]
+        public int? ClientId { get; set; }
 
-        public string Name { get; set; }
-        [Required(ErrorMessage = "Please enter your number"), MaxLength(10)]
+
+        [Required(ErrorMessage = "Please enter your name"), MaxLength(50)]
+        public string? Name { get; set; }
+
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "The number must be 10 characters long")]
+        
         public string? Number { get; set; }
-        [Required]
-      
+
+
+        [Required]      
          public string? Email { get; set; }
-        
-        public DateTime? BirthDate { get; set; }
-        
-        public string? Address { get; set; }
-        
-        public string? BusinessName { get; set; }
-        
-        public string? BusinessNumber { get; set; }
-        
-        public string? Category { get; set; }
-        
-        public string RefferrenceDescription { get; set; }
-        
-        public string? RefferenceDetails { get; set; }
-        
-        public string? AdditionInformation { get; set; }
-        
-        public IFormFile Additioninfo {  get; set; }
-        
-        public bool? IsDeleted { get; set; }
+
+
         [Required]
-        public string? IsActive { get; set; }
+        public DateTime? BirthDate { get; set; }
+
+
+        [Required]
+        public string? Address { get; set; }
+
+
+        [Required]
+        public string? BusinessName { get; set; }
+
+
+        [Required]
+        public string? BusinessNumber { get; set; }
+
+
+        [Required]
+        public string? Category { get; set; }
+       
+      
+        [Required]
+        public string? RefferenceDetails { get; set; }
+
+
+       
+        public string? AdditionInformation { get; set; }      
+
+        public IFormFile? Additioninfo {  get; set; }
+        
+
+        public bool? IsDeleted { get; set; }
+
+
+        [Required]
+        public string? IsActive { get; set; } = "True";
     }
 
 }

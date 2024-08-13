@@ -3,20 +3,28 @@
         <div id="kt_content_container" class="container-xxl">
             <div class="row" id="filter">
                 <div class="col-md-12">
-                    <div class="row">
+                    <div class="row pb-5">
                         <div class="col-md-12">
-                            <button class="btn btn-primary" id="filterButton"> Filters </button>
+                            <button class="btn btn-primary" id="filterButton">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+                                    <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z" />
+                                </svg> Filters
+                            </button>
                         </div>
                     </div>
+                    <form id="employeeformfilter">
+
                     <div class="card text-center" id="filterCard" style="display:none">
                         <div class="card-body pt-0">
-                            <form id="employeeformfilter">
                                 <div class="row pt-10">
                                     <div class="col-md-4">
                                         <input name="filterName" type="text" data-kt-customer-table-filter="search" class="form-control " placeholder="Name" />
                                     </div>
                                     <div class="col-md-4">
-                                        <input name="filterType" type="text" data-kt-customer-table-filter="search" class="form-control " placeholder="Type" />
+                                        <select name="filterType" class="form-select" data-allow-clear="true" tabindex="-1" id="EmployeeTypefilter" asp-items="@(new SelectList(ViewBag.EmpTypeDropDown,"Employeetype","Employeetype"))" data-placeholder="BusinessName">
+                                            <option value="">All Type</option>
+                                        </select>
+                                        @* <input name="filterType" type="text" data-kt-customer-table-filter="search" class="form-control " placeholder="Type" /> *@
                                     </div>
                                     <div class="col-md-4">
                                         <input name="filterJoinningDate" type="date" class="form-control" placeholder="Date" />
@@ -29,9 +37,20 @@
                                         <a class="btn btn-danger" onclick="clearFilters()" href="javascript:void(0);"> Clear</a>
                                     </div>
                                 </div>
-                            </form>
+                            
                         </div>
                     </div>
+                        <div class="row ">
+                            <input type="hidden" name="filterIsActive" id="filterIsActive" value="">
+                            <div class="col-md-6 text-end">
+                                <span type="button" class="alert alert-success fs-3 p-2 w-100 text-center""alert alert-success fs-3 p-2 w-100 text-center" onclick="setStatusAndFilter('True')">Active</span>
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <span type="button" class="alert alert-danger fs-3 p-2 w-100 text-center" onclick="setStatusAndFilter('False')">Inactive</span>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="row pt-10">
@@ -78,14 +97,18 @@
             }
         });
         filterEmployeeList();
+        function setStatusAndFilter(status) {
+            document.getElementById('filterIsActive').value = status;
+            filterEmployeeList();
+        }
         function filterEmployeeList() {
-            debugger
+            
             $.ajax({
                 type: 'GET',
                 url: '/Employee/GetEmployeeList',
                 data: $("#employeeformfilter").serializeArray(),
                 success: function (response) {
-                    debugger
+                    
                     $('#EmployeeListPartialView').html(response);
                 },
                 error: function (req, status, err) {

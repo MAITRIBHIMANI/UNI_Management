@@ -17,7 +17,7 @@ namespace UNIManagement.Entities.ViewModel
         public DateTime? Date { get; set; }
 
         public string? Document { get; set; }
-        public IFormFile DocumentFile { get; set; }
+        public IFormFile? DocumentFile { get; set; }
         public string? Duration { get; set; }
 
         public bool? IsActive { get; set; }

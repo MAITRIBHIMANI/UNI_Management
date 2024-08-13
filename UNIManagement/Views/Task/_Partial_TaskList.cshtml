@@ -7,6 +7,12 @@
 @model List<UNIManagement.Entities.ViewModel.TaskViewModel>
 
 <!--begin::Table-->
+@if (Model.Count < 1)
+{
+    <h1 class="text-center mt-3 text-secondary">No data Found</h1>
+}
+else
+{
 <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
     <!--begin::Table head-->
     <thead>
@@ -38,7 +44,24 @@
                 <td>@b.ProjectName</td>
                 <td>@Html.Raw(WebUtility.HtmlDecode(b.Description))</td>
                 <td>@Convert.ToDateTime(b.TaskAssignDate).ToString("dd-MM-yyyy")</td>
-                <td>@b.Status</td>
+              <td>
+                    @switch(b.Status)
+                        {
+                            case "Start":
+                                <span class="badge bg-warning ">Start</span>
+                                break;
+
+                            case "Pending":
+                                <span class="badge bg-danger">Pending</span>
+                                break;
+
+                            case "Completed":
+                                <span class="badge bg-success">Completed</span>
+                                break;
+                        }
+                         
+                </td>
+                 @* <td>@b.Status</td>  *@
                 <td class="text-center">
                     <a href="javascript:void(0);" class="view-task" data-task-id="@b.TaskId" aria-label="View Task">
 
@@ -69,6 +92,7 @@
     </tbody>
     <!--end::Table body-->
 </table>
+}
 <!--end::Table-->
 <div class="modal fade" id="ViewTask" tabindex="-1" role="dialog" aria-labelledby="AddModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

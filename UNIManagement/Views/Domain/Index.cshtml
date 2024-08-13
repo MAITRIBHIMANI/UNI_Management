@@ -4,39 +4,61 @@
         <div id="kt_content_container" class="container-xxl">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="row">
+                    <div class="row pb-5">
                         <div class="col-md-12">
-                            <button class="btn btn-primary" id="filterButton"> Filters </button>
+                            <button class="btn btn-primary" id="filterButton">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+                                    <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z" />
+                                </svg> Filters
+                            </button>
                         </div>
                     </div>
+                    <form id="domainformfilter">
+
                     <div class="card text-center" id="filterCard" style="display:none">
                         <div class="card-body pt-0">
-                            <form id="domainformfilter">
                                 <div class="row pt-10">
                                     <div class="col-md-4">
                                         <input type="text" name="filterName" data-kt-customer-table-filter="search" class="form-control " placeholder="Domain Name" />
                                     </div>
                                     <div class="col-md-4">
-                                        <select name="filterclientname" class="form-select" data-allow-clear="true" tabindex="-1" id="DomainClientfilter" asp-items="@(new SelectList(ViewBag.ClientDropDown,"Name","Name"))" data-control="select" data-placeholder="ClientName">
-                                            <option value="">
-                                              All Client
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input name="filterPurchaseDate" type="date" class="form-control" placeholder="Date" />
-                                    </div>
-                                </div>
 
+                                            <select name="filterclientname" class="form-select" data-allow-clear="true" tabindex="-1" data-placeholder="Select an client" id="DomainClientfilter" asp-items="@(new SelectList(ViewBag.ClientDropDown,"ClientId","Name"))" data-control="select">
+                                            <option value=" "><--Select Client--></></option>
+                                        </select>
+                                     
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input name="filterPurchaseDate" type="date" class="form-control" id="txtFrmDate" placeholder="Date" />
+
+                                    </div>
+                                    <div class="col-md-1 rounded border border-1">
+                                        <button class="btn" type="button" onclick="$('#txtFrmDate').val(''); $('#txtFrmDate').datepicker('update');"><i class="fa fa-minus-circle nopad2  fa-lg"></i></button>
+                                    </div>
+                                   
+                                </div>
+                            
                                 <div class="row pt-5 text-end">
                                     <div>
                                         <div onclick="filterDomainList()" class="btn btn-primary">Search</div>
                                         <a class="btn btn-danger" onclick="clearFilters()" href="javascript:void(0);"> Clear</a>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
+                        <div class="row ">
+                            <input type="hidden" name="filterIsActive" id="filterIsActive" value="">
+                            <div class="col-md-6 text-end">
+                                <span type="button" class="alert alert-success fs-3 p-2 w-100 text-center" onclick="setStatusAndFilter('True')">Active</span>
+                            </div>
+
+                            <div class="col-md-6 text-start">
+                                <span type="button" class="alert alert-danger fs-3 p-2 w-100 text-center" onclick="setStatusAndFilter('False');">Inactive</span>
+                            </div>
+                        </div>
+
+                    </form>
+
                 </div>
             </div>
 
@@ -73,6 +95,14 @@
 
     <!--end::Content-->
     <script>
+        function fun1() {
+            if (confirm("Are you sure you want to delete?")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
         document.getElementById('filterButton').addEventListener('click', function () {
             var filterCard = document.getElementById('filterCard');
             if (filterCard.style.display === 'none' || filterCard.style.display === '') {
@@ -82,14 +112,18 @@
             }
         });
         filterDomainList();
+        function setStatusAndFilter(status) {
+            document.getElementById('filterIsActive').value = status;
+            filterDomainList();
+        }
         function filterDomainList() {
-            debugger
+            
             $.ajax({
                 type: 'GET',
                 url: '/Domain/GetDomainList',
                 data: $("#domainformfilter").serializeArray(),
                 success: function (response) {
-                    debugger
+                    
                     $('#DomainListPartialView').html(response); 
                 },
                 error: function (req, status, err) {
@@ -101,7 +135,7 @@
 
         function clearFilters() {
             $('#domainformfilter')[0].reset();
-            // document.getElementById("clientformfilter").reset();
+         
             $.ajax({
                 type: 'GET',
                 url: '@Url.Action("GetDomainList", "Domain")',

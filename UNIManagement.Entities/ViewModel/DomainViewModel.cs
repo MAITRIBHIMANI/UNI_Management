@@ -10,9 +10,9 @@ namespace UNIManagement.Entities.ViewModel
 {
 	public class DomainViewModel
 	{
-		public int DomainId { get; set; }
+		public int? DomainId { get; set; }
 		[Required(ErrorMessage = "Domain Name IS Required")]
-		public string Name { get; set; }
+		public string? Name { get; set; }
 		
 		public string? Url { get; set; }
 
@@ -29,6 +29,6 @@ namespace UNIManagement.Entities.ViewModel
         public string? Description { get; set; }
 		public string? ClientName {  get; set; }
 		public string IsActive { get; set; }
-
-	}
+        public int? ClientId { get; set; }
+    }
 }

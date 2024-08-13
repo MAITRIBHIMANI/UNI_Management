@@ -1,5 +1,5 @@
 ﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<div class="d-flex flex-column flex-column-fluid" id="kt_content">
+ @* <div class="d-flex flex-column flex-column-fluid" id="kt_content">
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <div id="kt_content_container" class="container-xxl">
             <div class="row">
@@ -8,7 +8,7 @@
                         <td class="text-center">
                             <label for="month">Select Month:</label>
                             <select id="month" class="d-inline-block w-50 ml-2">
-                                <option value=''> --Select Month-- </option>
+
                                 <option value='0'>January</option>
                                 <option value='1'>February</option>
                                 <option value='2'>March</option>
@@ -31,9 +31,9 @@
                     </tr>
                 </table>
             </div>
-            <div class="row container mt-3">
+            <div class="row container mt-3 ">
                 <div id="currentmonthyear" class="d-flex justify-content-between align-items-center mb-3">
-                    <h5>July-2024</h5>
+                    <h5></h5>
                 </div>
                 <table id="attdancetable">
                     <tbody>
@@ -43,80 +43,266 @@
                     </tbody>
                 </table>
             </div>
-        @*     <div class="dropdown">
-                 <button onclick="myFunction()" class="dropbtn">Dropdown</button> 
-                <div id="myDropdown" class="dropdown-content">
-                    <a value="Present">Present</a>
-                    <a value="Leave">Leave</a>
-                    <a value="HalfLeave">HalfLeave</a>
-                </div>
-            </div> *@
+
         </div>
     </div>
 </div>
+ 
+ *@
 
-<script>
-    $(document).ready(function () {
-        var i, currentYear, startYear, endYear, newOption, dropdownYear;
-        dropdownYear = document.getElementById("dropdownYear");
-        currentYear = (new Date()).getFullYear();
-        startYear = 2021;
-        endYear = currentYear;
 
-        for (i = startYear; i <= endYear; i++) {
-            newOption = document.createElement("option");
-            newOption.value = i;
-            newOption.label = i;
-            if (i == currentYear) {
-                newOption.selected = true;
+<div class=" d-flex flex-column flex-column-fluid" id="kt_content">
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <div id="kt_content_container" class="container-xxl">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card text-center">
+                        <div class="card-header border-0 pt-6 row">
+                            <div class="col-md-12">
+                                <div class="card-toolbar d-flex justify-content-end">
+                                </div>
+                            </div>
+
+                            <div class="card-body pt-0">
+
+                                <div class="row">
+                                    <table class="table border-dark">
+                                        <tr>
+                                            <td class="text-center">
+                                                <label for="month">Select Month:</label>
+                                                <select id="month" class="d-inline-block w-50 ml-2">
+
+                                                    <option value='0'>January</option>
+                                                    <option value='1'>February</option>
+                                                    <option value='2'>March</option>
+                                                    <option value='3'>April</option>
+                                                    <option value='4'>May</option>
+                                                    <option value='5'>June</option>
+                                                    <option value='6'>July</option>
+                                                    <option value='7'>August</option>
+                                                    <option value='8'>September</option>
+                                                    <option value='9'>October</option>
+                                                    <option value='10'>November</option>
+                                                    <option value='11'>December</option>
+                                                </select>
+                                            </td>
+                                            <td class="align-middle">
+                                                <label for="dropdownYear">Select Year:</label>
+                                                <select id="dropdownYear" class="d-inline-block w-50 ml-2">
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row pt-10">
+                <div class="col-md-12">
+                    <div class="card text-center">
+                        <div class="card-header border-0 pt-6 row">
+                            <div class="col-md-12">
+                                <div class="card-toolbar d-flex justify-content-end">
+                                </div>
+                            </div>
+
+                            <div class="card-body pt-0">
+                                <div class="row mt-3 ">
+                                    <div id="currentmonthyear" class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5></h5>
+                                    </div>
+                                    <table id="attdancetable">
+                                        <tbody>
+                                            <tr id="rowofmonths"></tr>
+                                            <tr id="daynames"></tr>
+                                            <tr id="additionalRow" style="height:50px"></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--end::Post-->
+    </div>
+    <!--end::Content-->
+
+
+
+
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            var i, currentYear, startYear, endYear, newOption, dropdownYear;
+            dropdownYear = document.getElementById("dropdownYear");
+            currentYear = (new Date()).getFullYear();
+            var currentMonth = (new Date()).getMonth();
+            startYear = 2021;
+            endYear = currentYear;
+            // year dropdown
+            for (i = startYear; i <= endYear; i++) {
+                newOption = document.createElement("option");
+                newOption.value = i;
+                newOption.label = i;
+                if (i == currentYear) {
+                    newOption.selected = true;
+                }
+                dropdownYear.appendChild(newOption);
             }
-            dropdownYear.appendChild(newOption);
-        }
-        $('#attdancetable td').click(function () {
-
-            let date = $(this).index();
-            console.log(date);
-        });
-
-        $('#month, #dropdownYear').change(function () {
-            let year = $('#dropdownYear').val();
-            let month = $('#month').val();
-            generateCalendar(year, month);
-        });
-
-        function generateCalendar(year, month) {
-            let date = new Date(year, month);
-            let dayone = new Date(year, month, 1).getDay();
-            let lastdate = new Date(year, parseInt(month) + 1, 0).getDate();
-            let dayend = new Date(year, month, lastdate).getDay();
-            let dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-           
-            let lit = "";
-      
-            for (let i = 1; i <= lastdate; i++) {
-                let dayIndex = (dayone + i - 1) % 7;
-                lit += `<td class="border border-dark text-center"><a class="btn" value="${i}">${i}<br>${dayNames[dayIndex]}</a></td>`;
-
-             
-            }  
-            $("#rowofmonths").html(lit);
-            lit2 = "";
-            for (let i = 1; i <= lastdate; i++) {
-                lit2 += `<td class="border border-dark text-center"><a class="btn"></a></td>`;
-            }
-            $("#additionalRow").html(lit2);
-            let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            $("#currentmonthyear").html(`<th colspan="7">${monthNames[month]}-${year}</th>`);
-            $("#rowofmonths a").click(function () {
-                let value = $(this).attr('value');  
-                console.log(value);
+            // arguments month and year wise
+            $('#month, #dropdownYear').change(function () {
+                let year = $('#dropdownYear').val();
+                let month = $('#month').val();
+                generateCalendar(year, month);
             });
-        }
-        generateCalendar(currentYear, new Date().getMonth());
 
-      
-    });
-  
+            $('#month').val(currentMonth);
 
-</script>
-    
+
+
+            function generateCalendar(year, month) {
+
+                let date = new Date(year, month);
+                let dayone = new Date(year, month, 1).getDay();
+                //  let lastdate = new Date(year, month, 0).getDate();
+                //  let parsedMonth = parseInt(month, 10);
+                let lastdate = new Date(year, parseInt(month) + 1, 0).getDate();
+                let dayend = new Date(year, month, lastdate).getDay();
+                let dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+                // print header Month- Year
+                let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                $("#currentmonthyear").html(`<th colspan="7">${monthNames[month]}-${year}</th>`);
+                let lit = "";
+                // print date and day
+                for (let i = 1; i <= lastdate; i++) {
+                    let dayIndex = (dayone + i - 1) % 7;
+                    lit += `<td class="border border-dark text-center w-10"><a value="${i}">${i}<br>${dayNames[dayIndex]}</a></td>`;
+                }
+                $("#rowofmonths").html(lit);
+
+
+                $.ajax({
+                    url: '/Attandance/GetAttandaceForMonth',
+                    type: 'GET',
+                    data: {
+                        month: month,
+                        year: year,
+                    },
+                    success: function (response) {
+                        console.log(response);
+
+                        let lit2 = "";
+
+                        for (let i = 1; i <= lastdate; i++) {
+
+                            let attendance = response.find(a => a.day === i)
+                            console.log(attendance);
+
+                            if (attendance) {
+                                if (attendance.status === 1) {
+                                    statusText = 'P';
+                                } else if (attendance.status === 2) {
+                                    statusText = 'A';
+                                } else if (attendance.status === 3) {
+                                    statusText = 'HL';
+                                }
+                            } else {
+                                statusText = ' '; // Optionally, handle days with no data
+                            }
+
+                            lit2 += `<td class="border border-dark text-center atte">${statusText}</td>`;
+                        }
+
+                        $("#additionalRow").html(lit2);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+
+
+
+
+                //click on button print date
+                $('#attdancetable').on('click', '.atte', function () {
+                    let index = $(this).index() + 1;
+                    console.log(' Date : ' + index + '/ ' + (parseInt(month) + 1) + '/ ' + year);
+                    showDropdown(this, index, parseInt(month) + 1, year);
+
+                });
+
+                $(document).click(function (event) {
+                    if (!$(event.target).closest('.atte').length) {
+                        $('.dropdown-content').remove();
+                    }
+                });
+            }
+
+
+
+
+            generateCalendar(currentYear, new Date().getMonth());
+
+            function showDropdown(cell, index, month, year, status) {
+
+                // Remove any existing dropdowns
+                $('.dropdown-content').remove();
+
+                // Create the dropdown menu
+                let dropdown = `<div class="dropdown-content">
+                                                    <a href="#" class="dropdown" data-value="1" >Present</a>
+                                                                <a href="#" class="dropdown" data-value="2" >Absent</a>
+                                                                <a href="#" class="dropdown" data-value="3" >Half Leave</a>
+                                       </div>`;
+
+                // Append the dropdown to the cell
+                $(cell).append(dropdown);
+
+                // Show the dropdown
+                $(cell).find('.dropdown-content').show();
+
+                // Handle dropdown item click
+                $('.dropdown').click(function (event) {
+                    event.preventDefault();
+                    let status = $(this).text();
+                    let value = $(this).data('value');
+                    console.log('Status:', status);
+                    $(this).closest('td').text(status); // Optionally, replace cell content with status
+                    $('.dropdown-content').remove(); // Remove the dropdown
+
+
+                    $.ajax({
+                        url: '/Attandance/SaveAttendance',
+                        type: 'GET',
+                        data: {
+                            day: index,
+                            month: month,
+                            year: year,
+                            status: value
+                        },
+                        success: function (response) {
+                            console.log(data);
+
+                            $('.dropdown-content').remove(); // Remove the dropdown
+                        },
+                        error: function (error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                });
+            }
+
+        });
+
+
+    </script>

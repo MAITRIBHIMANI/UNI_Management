@@ -1,4 +1,5 @@
 ﻿ @model UNIManagement.Entities.ViewModel.DomainViewModel;
+
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!--begin::Content-->
@@ -20,7 +21,7 @@
                                 </div>
                                 <div class="col-md-6 text-end">
 
-                                    <a class="btn rounded-2  border-primary" asp-controller="Domain" asp-action="Index">
+                                     <a class="btn rounded-2  border-primary" onclick="history.back()">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
                                         </svg>Back
@@ -33,6 +34,7 @@
                                     <div class="form-group">
                                         <input type="hidden" asp-for="DomainId" class="form-control" />
                                     </div>
+
                                     <div class="col-md-6">
                                         <label asp-for="Name">Name</label>
                                         <input type="text" asp-for="Name" class="form-control" />
@@ -45,8 +47,17 @@
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="col-md-6">
+                                          <label>Client</label>
+                                       <select class="form-select" asp-for="ClientId" data-allow-clear="true"  onchange="fnSetClientName(this)" tabindex="-1" asp-items="@(new SelectList(ViewBag.ClientDropDown,"ClientId","Name"))" data-control="select" data-placeholder="Client">
+                                            <option><-- Select a Client --></option>
+                                        </select> 
+                                    <input type="hidden" asp-for="ClientName" id="clientName" />
+                                  
+                                    </div>
+                                </div>
                                 <div class="row pt-5">
-
                                     <div class="col-md-6">
                                         <label asp-for="PurchaseDate"></label>
                                         <input type="date" asp-for="PurchaseDate" class="form-control" />
@@ -79,14 +90,13 @@
                                             <option value="5.5year">5.5Year</option>
                                         </select>
                                     </div>
-
-
                                 </div>
                                 <div class="row pt-5">
                                     <div class="col-md-6">
                                         <label asp-for="Platform"></label>
                                         <textarea type="text" id="editor" asp-for="Platform"></textarea>
                                         <script>
+                                          
                                             ClassicEditor
                                                 .create(document.querySelector('#editor'))
                                                 .then(editor1 => {
@@ -96,7 +106,6 @@
                                                     console.error(error);
                                                 });
                                         </script>
-
                                     </div>
                                     <div class="col-md-6">
                                         <label asp-for="CredentialDetails"></label>
@@ -116,22 +125,16 @@
                                     </div>
 
                                 </div>
-
+                               
                                 <div class="row pt-5">
-                                @*     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="kt_check_indeterminate_1" value="True" asp-for="IsActive" />
-                                        <label class="form-check-label" for="kt_check_indeterminate_1">
-                                            Status
-                                        </label>
-                                    </div> *@
+                             
                                     <div class="col-md-6">
-                                        <div class="form-check align-center" id="workshopcheckbox">
-                                           
-                                                <input id="isworkshop" class="form-check-input" type="checkbox" asp-for="IsWorkshopPurchased" value="True" >
-                                            <label class="form-check-label" >
-                                                Is Workshop Purchased
-                                            </label>
-                                        </div>
+                                       <div class="form-check align-center" id="workshopcheckbox">
+        <input id="isworkshop" class="form-check-input" type="checkbox" asp-for="IsWorkshopPurchased" value="True">
+        <label class="form-check-label" for="isworkshop">
+            Is Workshop Purchased
+        </label>
+    </div>
                                     </div>
                                 </div>
                                 <div class="row answer" id="answer" style="display:none">
@@ -155,12 +158,16 @@
                                     </div>
                                 </div>
                               
-                                <div class="row pt-5">
-                                    <div class="">
-
-                                    </div>
+                                <div class="row pt-5">                                    
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="kt_check_indeterminate_1" value="True" asp-for="IsActive" />
+                                         @if (Model == null)
+                                        {
+                                            <input class="form-check-input" type="checkbox" value="" id="kt_check_indeterminate_1" value="True" asp-for="IsActive" checked />
+                                        }
+                                        else
+                                        {
+                                            <input class="form-check-input" type="checkbox" value="" id="kt_check_indeterminate_1" value="True" asp-for="IsActive" />
+                                        }
                                         <label class="form-check-label" for="kt_check_indeterminate_1">
                                             Is Active
                                         </label>
@@ -183,16 +190,16 @@
 </div>
 <!--end::Content-->
 <script>
-  
+  function fnSetClientName(element){
+        console.log(element);
+        document.getElementById("clientName").value = element.options[element.selectedIndex].text;
+    }
     $("#isworkshop").click(function () {
-
-        $(".row answer").hide();
-     
-            if ($(this).is(":checked")) {
-                $(".answer").show();
-            } else {
-                $(".answer").hide();
-            }
-        
+         
+        if ($(this).is(":checked")) {
+            $(".answer").show();
+        } else {
+            $(".answer").hide();
+        }
     });
 </script>

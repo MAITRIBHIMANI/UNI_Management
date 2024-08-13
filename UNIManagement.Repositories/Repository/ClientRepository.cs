@@ -26,7 +26,7 @@ namespace UNIManagement.Repositories.Repository
         #endregion
 
         #region Client All
-        /// <summary>
+
         /// Retrive Lists from Client Table 
         /// </summary>
         /// <returns></returns>
@@ -34,43 +34,44 @@ namespace UNIManagement.Repositories.Repository
         {
             return _context.Clients
                            .Where(x => x.IsDeleted == false)
+                           .OrderByDescending(x => x.Modified)
                            .Select(cont => new ClientViewModel()
                            {
                                ClientId = cont.ClientId,
                                Name = cont.Name,
                                Number = cont.Number,
                                BusinessName = cont.BusinessName,
-                               BusinessNumber=cont.BusinessNumber,
+                               BusinessNumber = cont.BusinessNumber,
                                IsActive = cont.IsActive,
                            }).ToList();
         }
 
-
-   
-      
-        public List<ClientViewModel> GetClientListfilter(string filterName, string filterBusinessName, DateTime? filterBirthDate)
+        /// <summary>
+        /// Retrive Lists of filter data
+        /// </summary>
+        /// <param name="filterName"></param>
+        /// <param name="filterBusinessName"></param>
+        /// <param name="filterBirthDate"></param>
+        /// <param name="filterIsActive"></param>
+        /// <returns></returns>
+        public List<ClientViewModel> GetClientListfilter(string filterName, string filterBusinessName, DateTime? filterBirthDate, string filterIsActive)
         {
-            var clientList = _context.Clients.Where(x => x.IsDeleted == false
-                                                 && (string.IsNullOrEmpty(filterName) || x.Name.ToLower().Contains(filterName.ToLower()))
-                                                 && (string.IsNullOrEmpty(filterBusinessName) || x.BusinessName.ToLower().Contains(filterBusinessName.ToLower()))
-                                                  && (!filterBirthDate.HasValue || x.BirthDate == filterBirthDate.Value)
-                                                
-                                                 ).Select(cont=> new ClientViewModel()
-                                                 {
-                                                     ClientId = cont.ClientId,
-                                                     Name = cont.Name,
-                                                     Number = cont.Number,
-                                                     BusinessName = cont.BusinessName,
-                                                     IsActive = cont.IsActive,
-                                                 }
-
-
-
-            ).ToList();
-         
-
+            var clientList = _context.Clients
+                                     .Where(x => x.IsDeleted == false
+                                            && (string.IsNullOrEmpty(filterName) || x.Name.ToLower().Contains(filterName.Trim().ToLower()))
+                                            && (string.IsNullOrEmpty(filterBusinessName) || x.BusinessName.ToLower().Contains(filterBusinessName.ToLower()))
+                                            && (!filterBirthDate.HasValue || x.BirthDate == filterBirthDate.Value)
+                                            && (string.IsNullOrEmpty(filterIsActive) || x.IsActive.ToLower() == filterIsActive.ToLower()))
+                                     .OrderByDescending(x => x.Modified)
+                                     .Select(cont => new ClientViewModel()
+                                     {
+                                         ClientId = cont.ClientId,
+                                         Name = cont.Name,
+                                         Number = cont.Number,
+                                         BusinessName = cont.BusinessName,
+                                         IsActive = cont.IsActive,
+                                     }).ToList();
             return clientList;
-
         }
 
         #endregion
@@ -83,7 +84,9 @@ namespace UNIManagement.Repositories.Repository
         /// <returns></returns>
         public async Task DeleteClientAsync(int ClientId)
         {
-            Client d = await _context.Clients.Where(x => x.ClientId == ClientId).FirstOrDefaultAsync();
+            Client? d = await _context.Clients
+                                      .Where(x => x.ClientId == ClientId)
+                                      .FirstOrDefaultAsync();
             if (d != null)
             {
                 d.IsDeleted = true;
@@ -97,7 +100,6 @@ namespace UNIManagement.Repositories.Repository
         /// <summary>
         /// Add Client Details
         /// </summary>
-        /// <param name="model"></param>
         /// <returns></returns>
         public void AddClient(ClientViewModel model)
         {
@@ -112,27 +114,22 @@ namespace UNIManagement.Repositories.Repository
                 Client.BusinessName = model.BusinessName;
                 Client.BusinessNumber = model.BusinessNumber;
                 Client.Category = model.Category;
-                Client.AdditionInformation = model.AdditionInformation;
                 Client.RefferenceDetails = model.RefferenceDetails;
                 Client.IsActive = model.IsActive;
                 Client.IsDeleted = false;
                 Client.Created = DateTime.Now;
                 _context.Clients.Add(Client);
                 _context.SaveChanges();
-
-                Client.AdditionInformation = Helper.UploadClientAdditionalInfo(model.Additioninfo, Client.ClientId, "Client", "Information.pdf");
+                Client.AdditionInformation = Helper.UploadFile(model.Additioninfo, Client.ClientId, "Client", "Information.pdf");
                 Client.CreatedBy = Client.ClientId;
-
+                Client.Modified = Client.Created;
+                Client.ModifiedBy = Client.ClientId;
                 _context.SaveChanges();
-
             }
             catch (Exception e)
             {
                 return;
             }
-
-
-
         }
         #endregion
 
@@ -145,9 +142,9 @@ namespace UNIManagement.Repositories.Repository
         {
             try
             {
-                Client client = _context.Clients
-                                .Where(x => x.ClientId == model.ClientId)
-                                .FirstOrDefault();
+                Client? client = _context.Clients
+                                         .Where(x => x.ClientId == model.ClientId)
+                                         .FirstOrDefault();
                 if (client != null)
                 {
                     client.Name = model.Name;
@@ -163,15 +160,17 @@ namespace UNIManagement.Repositories.Repository
                     client.IsActive = model.IsActive;
                     client.Modified = DateTime.Now;
                     client.ModifiedBy = model.ClientId;
-                    if (model.Additioninfo != null)
-                        client.AdditionInformation = Helper.UploadClientAdditionalInfo(model.Additioninfo, client.ClientId, "Client", "Information.pdf");
+                    if (model.AdditionInformation == null)
+                        client.AdditionInformation = Helper.UploadFile(model.Additioninfo, client.ClientId, "Client", "Information.pdf");
 
                     _context.Clients.Update(client);
                     _context.SaveChanges();
                 }
-
             }
-            catch (Exception e) { return; }
+            catch (Exception e) 
+            { 
+                return; 
+            }
         }
         #endregion
 
@@ -183,7 +182,6 @@ namespace UNIManagement.Repositories.Repository
         /// <returns></returns>
         public ClientViewModel GetClientDetails(int ClientId)
         {
-
             var Client = _context.Clients
                          .FirstOrDefault(x => x.ClientId == ClientId);
             if (Client != null)
@@ -201,15 +199,12 @@ namespace UNIManagement.Repositories.Repository
                     Category = Client.Category,
                     RefferenceDetails = Client.RefferenceDetails,
                     IsActive = Client.IsActive,
-                    AdditionInformation=Client.AdditionInformation,
+                    AdditionInformation = Client.AdditionInformation,
                 };
             }
             return new ClientViewModel();
-
-
         }
         #endregion
 
-      
     }
 }

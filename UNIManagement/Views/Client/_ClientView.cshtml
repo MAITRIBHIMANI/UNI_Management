@@ -11,7 +11,7 @@
     <p>BusinessName : @Model.BusinessName</p>
     <p>BusinessNumber : @Model.BusinessNumber</p>
     <p>Category : @Model.Category</p>
-    <p>AdditionalInformation : @Model.AdditionInformation</p>
+    <p>AdditionalInformation : <img src="~/Client/AdditionalInformation/@Model.ClientId.@Model.AdditionInformation" /> </p>
     <p>RefferenceDetails :  @Html.Raw(WebUtility.HtmlDecode(Model.RefferenceDetails)) </p>
   
 
