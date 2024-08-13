@@ -103,6 +103,7 @@
 @section Scripts {
 
     <script>
+        //delete pop up
         function fun1() {
             if (confirm("Are you sure you want to delete?")) {
                 return true;
@@ -111,6 +112,7 @@
                 return false;
             }
         }
+        //filter button js
         document.getElementById('filterButton').addEventListener('click', function () {
             var filterCard = document.getElementById('filterCard');
             if (filterCard.style.display === 'none' || filterCard.style.display === '') {
@@ -121,6 +123,7 @@
         });
 
         filterTaskList();
+        //filter by IsActive
         function setStatusAndFilter(status) {
             document.getElementById('filterstatus').value = status;
             console.log(status);
@@ -128,6 +131,7 @@
            
 
         }
+        //filtering data ajax
         function filterTaskList() {
             console.log($("#taskformfilter").serializeArray());
             $.ajax({

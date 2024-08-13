@@ -31,6 +31,7 @@ namespace UNIManagement.Repositories.Repository
                           select new TaskViewModel
                           {
                               TaskId = task.TaskId,
+                              TokenNumber = task.TokenNumber,
                               EmployeeName = emp.FirstName,
                               ProjectName = proj.Name,
                               Description = task.Description,
@@ -64,8 +65,7 @@ namespace UNIManagement.Repositories.Repository
                                                 Description = task.Description,
                                                 TaskAssignDate = task.TaskAssignDate,
                                                 Status = task.Status,
-                                            }
-                                         ).ToList();
+                                            }).ToList();
             return taskList;
 
             }
@@ -75,7 +75,9 @@ namespace UNIManagement.Repositories.Repository
         #region Delete
         public async Task DeleteTasktsync(int id)
         {
-            EmployeeTask? d = await _context.EmployeeTasks.Where(x => x.TaskId == id).FirstOrDefaultAsync();
+            EmployeeTask? d = await _context.EmployeeTasks
+                                            .Where(x => x.TaskId == id)
+                                            .FirstOrDefaultAsync();
             if (d != null)
             {
                 d.IsDeleted = true;
@@ -89,30 +91,27 @@ namespace UNIManagement.Repositories.Repository
         /// <summary>
         /// Add Employee Details
         /// </summary>
-        /// <param name="model"></param>
         /// <returns></returns>
         public void AddTask(TaskViewModel model)
         {
             try
             {
                 var Task = new EmployeeTask();
+                Task.TokenNumber = GenerateTokenName(model.ProjectName, model.EmployeeName);
                 Task.ProjectId = model.ProjectId;
                 Task.EmployeeId = model.EmployeeId;             
-                Task.Description = model.Description;
-                Task.TokenNumber = GenerateTokenName(model.ProjectName,model.EmployeeName);
+                Task.Description = model.Description;               
                 Task.TaskAssignDate = model.TaskAssignDate;
                 Task.DueDate = model.DueDate;
                 Task.Status = model.Status;
                 Task.Created = DateTime.Now;
-                Task.IsDeleted = false;
-             
+                Task.Modified = Task.Created;
+                Task.IsDeleted = false;             
                 _context.EmployeeTasks.Add(Task);
                 _context.SaveChanges();
                 Task.Document = Helper.UploadFile(model.TaskDocument, Task.TaskId, "Task", "Document.pdf");
-                Task.Modified = Task.Created;
                 Task.CreatedBy = Task.EmployeeId;
-                Task.ModifiedBy = Task.EmployeeId;
-              
+                Task.ModifiedBy = Task.EmployeeId;              
                 _context.SaveChanges();
             }
             catch (Exception e)
@@ -159,13 +158,11 @@ namespace UNIManagement.Repositories.Repository
                     task.Description = model.Description;
                     task.TaskAssignDate = model.TaskAssignDate;
                     task.DueDate = model.DueDate;
-                    task.Status = model.Status;
-                   
+                    task.Status = model.Status;                   
                     task.Modified = DateTime.Now;
                     task.ModifiedBy = model.TaskId;
                     if (model.TaskDocument != null)
-                        task.Document = Helper.UploadFile(model.TaskDocument, task.TaskId, "Task", "Document.pdf");
-                 
+                        task.Document = Helper.UploadFile(model.TaskDocument, task.TaskId, "Task", "Document.pdf");                 
                     _context.EmployeeTasks.Update(task);
                     _context.SaveChanges();
                 }

@@ -56,18 +56,7 @@
                         </div>
 
 
-                 @*    <div class="row ">
-                            <input type="hidden" name="filterIsActive" id="filterIsActive" value="">
-                            <div class="col-md-6 text-end">
-                                <span type="button" class="alert alert-success fs-3 p-2 w-100 text-center" onclick="setStatusAndFilter('True')">Active</span>
-                        </div>
-
-                        <div class="col-md-6 text-start">
-                                <span type="button" class="alert alert-danger fs-3 p-2 w-100 text-center" onclick="setStatusAndFilter('False')">Inactive</span>
-                        </div>
-                    </div> *@
-
-
+           
                     </form>
 
                     </div>
@@ -110,6 +99,7 @@
 @section Scripts {
 
     <script>
+        //delete alert pop
         function fun1() {
             if (confirm("Are you sure you want to delete?")) {
                 return true;
@@ -118,6 +108,7 @@
                 return false;
             }
         }
+        // filter button js
         document.getElementById('filterButton').addEventListener('click', function () {
             var filterCard = document.getElementById('filterCard');
             if (filterCard.style.display === 'none' || filterCard.style.display === '') {
@@ -127,6 +118,7 @@
 
             }
         });
+        // clear button in filter
         function clearFilters() {
             $('#clientformfilter')[0].reset();
             // document.getElementById("clientformfilter").reset();
@@ -145,6 +137,7 @@
         }
 
         filterClientList();
+        //IsActive filter 
         function setStatusAndFilter(status) {
             document.getElementById('filterIsActive').value = status;
             var activeBtn = document.getElementById('activeBtn');
@@ -164,10 +157,9 @@
             }
             filterClientList();
         }
-        function filterClientList() {
-            
-            $.ajax({
-               
+        //filtered list ajax
+        function filterClientList() {                        
+            $.ajax({               
                 type: 'GET',
                 url: '/Client/GetClientList',
                 data: $("#clientformfilter").serializeArray(),

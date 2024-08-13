@@ -143,6 +143,7 @@
 </div>
 <!--end::Content-->
 <script>
+    //fill dropdown projectname and employeename
     function fnSetProjectName(element){
         console.log(element);
         document.getElementById("projectName").value = element.options[element.selectedIndex].text;
@@ -151,6 +152,7 @@
         console.log(element);
         document.getElementById("employeeName").value = element.options[element.selectedIndex].text;
     }
+    //Date Validation
     function validateDates() {
         var assignDate = document.getElementById("assignDate").value;
         var dueDate = document.getElementById("dueDate").value;

@@ -10,13 +10,9 @@ using UNIManagement.Entities.DataModels;
 namespace UNIManagement.Repositories.CommanHelper
 {
     public class Helper
-    {
-     
-      
-
+    {   
         public static string UploadFile(IFormFile UploadFile, int ID, string rootPath, string filename)
         {
-
             if (UploadFile != null)
             {
                 string FilePath = "wwwroot\\Documents\\" + rootPath + "\\" + ID;
@@ -36,13 +32,10 @@ namespace UNIManagement.Repositories.CommanHelper
                     UploadFile.CopyTo(stream);
                 }
 
-
                 return filename;
             }
 
             return null;
-        }
-
-       
+        }       
     }
 }

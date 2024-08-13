@@ -36,12 +36,12 @@ namespace UNIManagement.Repositories.Repository
                               ProjectId = project.ProjectId,
                               Name = project.Name,
                               BusinessName = project.BusinessName,
-                              Document = ProjectAttachment.Document,
                               ArrivalDate = project.ArrivalDate,
                               CommitmentDate = project.CommitmentDate,
                               IsActive = project.IsActive,
-                              Modified = project.Modified,
-                          }).OrderByDescending(x => x.Modified).ToList();
+                              Document = ProjectAttachment.Document,
+                          }).OrderByDescending(x => x.Modified)
+                            .ToList();
 
             return result;
         }
@@ -63,11 +63,11 @@ namespace UNIManagement.Repositories.Repository
                                                              ProjectId = project.ProjectId,
                                                              Name = project.Name,
                                                              BusinessName = project.BusinessName,
-                                                             Document = ProjectAttachment.Document,
                                                              ArrivalDate = project.ArrivalDate,
                                                              CommitmentDate = project.CommitmentDate,
                                                              IsActive = project.IsActive,
-                                                         }).ToList();
+                                                             Document = ProjectAttachment.Document,                                                            
+                                                         }).OrderByDescending(x => x.Modified).ToList();
             return projectList;
         }
 
@@ -80,9 +80,9 @@ namespace UNIManagement.Repositories.Repository
             try
             {
                 var Project = new Project();
+                Project.Name = model.Name;
                 Project.ClientId = model.ClientId;
                 Project.DomainId = model.DomainId;
-                Project.Name = model.Name;
                 Project.ArrivalDate = model.ArrivalDate;
                 Project.CommitmentDate = model.CommitmentDate;
                 Project.GitRepo = model.GitRepo;
@@ -91,10 +91,10 @@ namespace UNIManagement.Repositories.Repository
                 Project.IsActive = model.IsActive;
                 Project.IsDeleted = false;
                 Project.Created = DateTime.Now;
+                Project.Modified = Project.Created;
                 _context.Projects.Add(Project);
                 _context.SaveChanges();
                 Project.CreatedBy = Project.ProjectId;
-                Project.Modified = Project.Created;
                 Project.ModifiedBy = Project.ProjectId;
                 _context.SaveChanges();
 
@@ -103,7 +103,7 @@ namespace UNIManagement.Repositories.Repository
                 projectattachment.ProjectId = Project.ProjectId;
                 projectattachment.Document = Helper.UploadFile(model.Projectdocument, Project.ProjectId, "Projct", "Document.pdf");
                 projectattachment.DocDescription = model.DocDescription;
-                projectattachment.Created = DateTime.Now;
+                projectattachment.Created = DateTime.Now; 
                 projectattachment.Modified = projectattachment.Created;
                 projectattachment.IsDeleted = false;
                 _context.ProjectAttachments.Add(projectattachment);

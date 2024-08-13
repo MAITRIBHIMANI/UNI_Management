@@ -120,7 +120,7 @@ else
 
 <script>
     $(document).ready(function () {
-
+        //get id for view modal 
         $(document).on('click', '.view-client', function () {
             var ClientId = $(this).data('client-id');
             console.log(ClientId)
@@ -136,7 +136,7 @@ else
                 success: function (data) {
                     // Display modal with fetched data
                     console.log(data);
-                    $("#ViewClientModal").html(data);
+                    $("#ViewClientModal").html(data); 
                     $('#ViewClient').modal("show");
                 },
                 error: function (req, status, err) {

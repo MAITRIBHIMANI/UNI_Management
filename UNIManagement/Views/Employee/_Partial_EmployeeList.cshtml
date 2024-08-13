@@ -114,13 +114,13 @@ else
 
 <script>
     $(document).ready(function () {
-
+        //view modal
         $(document).on('click', '.view-employee', function () {
             var employeeId = $(this).data('employee-id');
             console.log(employeeId)
             OpenViewModal(employeeId);
         });
-
+        //view data ajax
         function OpenViewModal(employeeId) {
             console.log(employeeId);
             $.ajax({

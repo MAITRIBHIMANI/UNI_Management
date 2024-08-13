@@ -79,6 +79,7 @@
 </div>
 @section Scripts {
     <script>
+        //delete pop up
         function fun1() {
             if (confirm("Are you sure you want to delete?")) {
                 return true;
@@ -87,7 +88,7 @@
                 return false;
             }
         }
-
+        //filter button
         document.getElementById('filterButton').addEventListener('click', function () {
             var filterCard = document.getElementById('filterCard');
             if (filterCard.style.display === 'none' || filterCard.style.display === '') {
@@ -97,10 +98,12 @@
             }
         });
         filterEmployeeList();
+        //IsActive filtering
         function setStatusAndFilter(status) {
             document.getElementById('filterIsActive').value = status;
             filterEmployeeList();
         }
+       //filtered data ajax
         function filterEmployeeList() {
             
             $.ajax({
@@ -118,7 +121,7 @@
             });
         }
 
-
+        //filter clear button js
         function clearFilters() {
             $('#employeeformfilter')[0].reset();
             // document.getElementById("clientformfilter").reset();
