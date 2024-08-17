@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations; 
 namespace UNIManagement.Entities.ViewModel
 {
     public class EmployeeDetailsViewModel
     {
+       
         public int? EmployeeId { get; set; }
 
         [Required(ErrorMessage = "First Name Is Required")]

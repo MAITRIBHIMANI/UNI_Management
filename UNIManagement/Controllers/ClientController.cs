@@ -1,5 +1,4 @@
-﻿ 
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using UNIManagement.Entities.ViewModel;
 using UNIManagement.Repositories.Repository;
@@ -81,6 +80,7 @@ namespace UNIManagement.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+         
         public IActionResult AddEdit(ClientViewModel model)
         {
             if (ModelState.IsValid)
@@ -99,6 +99,8 @@ namespace UNIManagement.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+           [HttpGet, Route("client/update", Name = "ClientUpdate")]
+
         public IActionResult Update(int id)
         {
             var Client = _clientRepository.GetClientDetails((int)id);

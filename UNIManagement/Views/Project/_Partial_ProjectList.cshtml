@@ -33,12 +33,9 @@ else
                 <tr>
                     <td>@i </td>
                     <td>@b.Name</td>
-                    <td>@b.BusinessName</td>
-
-                    @* <td><a class="btn btn-primary" href="/Documents/Projct/@b.ProjectId/Document.pdf" target="_blank">Document</a></td> *@
+                    <td>@b.BusinessName</td>                   
                     <td>@Convert.ToDateTime(b.ArrivalDate).ToString("dd-MM-yyyy")</td>
                     <td>@Convert.ToDateTime(b.CommitmentDate).ToString("dd-MM-yyyy")</td>
-
                     <td>
                         @if (b.IsActive == "false")
                         {
@@ -49,7 +46,6 @@ else
                             <span class="badge bg-success">Active</span>
                         }
                     </td>
-
                     <td class="text-center">
                         <a href="/Documents/Projct/@b.ProjectId/Document.pdf" download="" target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-arrow-down-fill  text-info" viewBox="0 0 16 16">

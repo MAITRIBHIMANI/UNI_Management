@@ -23,43 +23,32 @@ namespace UNIManagement.Entities.ViewModel
         
         public string? Number { get; set; }
 
-
         [Required]      
          public string? Email { get; set; }
-
 
         [Required]
         public DateTime? BirthDate { get; set; }
 
-
         [Required]
         public string? Address { get; set; }
-
 
         [Required]
         public string? BusinessName { get; set; }
 
-
         [Required]
         public string? BusinessNumber { get; set; }
 
-
         [Required]
-        public string? Category { get; set; }
-       
+        public string? Category { get; set; }   
       
-        [Required]
+     
         public string? RefferenceDetails { get; set; }
-
-
        
         public string? AdditionInformation { get; set; }      
 
-        public IFormFile? Additioninfo {  get; set; }
-        
+        public IFormFile? Additioninfo {  get; set; }       
 
         public bool? IsDeleted { get; set; }
-
 
         [Required]
         public string? IsActive { get; set; } = "True";

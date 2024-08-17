@@ -27,8 +27,10 @@ namespace UNIManagement.Entities.ViewModel
 
 		public string? WorkshpaceRenewDuration { get; set; }
         public string? Description { get; set; }
-		public string? ClientName {  get; set; }
+        [Required(ErrorMessage = "Client Name IS Required")]
+        public string? ClientName {  get; set; }
 		public string IsActive { get; set; }
+        [Required(ErrorMessage = "Client Id Name IS Required")]
         public int? ClientId { get; set; }
     }
 }

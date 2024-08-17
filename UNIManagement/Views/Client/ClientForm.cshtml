@@ -9,7 +9,7 @@
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-            <form asp-action="AddEdit" asp-controller="Client" method="post" enctype="multipart/form-data">
+            <form id="clientForm" asp-action="AddEdit" asp-controller="Client" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-12">
                         <!--begin::Card CLient-->
@@ -58,9 +58,13 @@
                                         <span asp-validation-for="Email" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-6">
-                                        <label asp-for="BirthDate"></label>
-                                        <input type="date" asp-for="BirthDate" class="form-control" />
-                                        <span asp-validation-for="BirthDate" class="text-danger"></span>
+                                       
+                                                <label asp-for="BirthDate"></label>
+                                                <input type="date" asp-for="BirthDate" id="txtFrmDate" class="form-control" />
+                                                <span asp-validation-for="BirthDate" class="text-danger"></span>
+
+
+                                      
                                     </div>
                                 </div>
                                 <div class="row pt-5">
@@ -73,14 +77,9 @@
                                 <div class="row pt-5">
                                     <div class="form-check">
                                      
-                                        @if (Model == null)
-                                        {
-                                            <input class="form-check-input" type="checkbox" value="" id="kt_check_indeterminate_1" value="True" asp-for="IsActive" checked />
-                                        }
-                                        else
-                                        {
-                                            <input class="form-check-input" type="checkbox" value="" id="kt_check_indeterminate_1" value="True" asp-for="IsActive" />
-                                        }
+                                       
+                                            <input class="form-check-input" type="checkbox"  id="kt_check_indeterminate_1" value="True" asp-for="IsActive"  />
+                                     
                                         <label class="form-check-label" for="kt_check_indeterminate_1">
                                             Is Active
                                         </label>
@@ -161,22 +160,32 @@
                                     <div class="col-md-12">
                                         <label asp-for="RefferenceDetails"></label>
                                         <textarea type="text" id="editor1" asp-for="RefferenceDetails"></textarea>
-                                        <script>
+                                        <script>             
+                                            let editorInstance;
                                             ClassicEditor
                                                 .create(document.querySelector('#editor1'))
                                                 .then(editor1 => {
+                                                    editorInstance = editor1;
                                                     console.log(editor1);
                                                 })
                                                 .catch(error => {
                                                     console.error(error);
                                                 });
+                                            document.getElementById('clientForm').addEventListener('reset', () => {
+                                                if (editorInstance) {
+                                                    editorInstance.setData(''); // Clear CKEditor content
+                                                }
+                                            });
                                         </script>
+                                        <span asp-validation-for="RefferenceDetails" class="text-danger"></span>
+                                     
                                     </div>
 
                                 </div>
 
-                                <div class="form-group pt-5 text-center">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="form-group pt-5 text-center">                                   
+                                    <button type="reset" class="btn btn-danger">Reset</button>
+                                    <button type="button" class="btn btn-primary" onclick="confirmEdit('@Model.Name')">Submit</button>                                  
                                 </div>
                             </div>
                         </div>
@@ -191,4 +200,22 @@
     <!--end::Post-->
 </div>
 <!--end::Content-->
-
+<script>
+    function confirmEdit(clientName) {
+        debugger
+        Swal.fire({
+            title: 'Are you sure?',
+            text: `You are about to edit the client: ${clientName}.`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, edit it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // You can either navigate to the edit action or submit the form here
+                document.getElementById('clientForm').submit();
+            }
+        });
+    }
+</script>

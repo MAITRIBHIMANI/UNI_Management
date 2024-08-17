@@ -9,7 +9,7 @@
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-            <form asp-action="AddEdit" asp-controller="Employee" method="post" enctype="multipart/form-data">
+            <form id="employeeForm" asp-action="AddEdit" asp-controller="Employee" method="post" enctype="multipart/form-data">
 
                 <div class="row">
                     <div class="col-md-12">
@@ -125,7 +125,7 @@
                                         <span asp-validation-for="EmployeeImage" class="text-danger"></span>
                                     </div>
 
-                                         <div class="col-md-4">
+                                        @*  <div class="col-md-4">
                                         @{
                                             var filePath = Model.Photo;
                                             bool isPdf = false;
@@ -147,7 +147,7 @@
                                                      alt="Image related to client" />
                                             }
                                         </div>
-                                    </div>                                 
+                                    </div>         *@                         
                                     @* <div class="col-md-4 pt-7">
                                         @if (Model != null && !string.IsNullOrEmpty(Model.Photo))
                                         {
@@ -245,17 +245,25 @@
                                 <div class="row pt-5">
                                     <div class="col-md-12">
                                         <label asp-for="Bond"></label>
-                                        <textarea type="text" id="editor" asp-for="Bond"></textarea>
-                                        <script>
+                                        <textarea type="text" id="editor1" asp-for="Bond"></textarea>
+                                        @*    <script>             
+                                            let editorInstance;
                                             ClassicEditor
                                                 .create(document.querySelector('#editor'))
-                                                .then(editor => {
+                                                .then(editor1 => {
+                                                    editorInstance = editor;
                                                     console.log(editor);
                                                 })
                                                 .catch(error => {
                                                     console.error(error);
                                                 });
-                                        </script>
+                                            document.getElementById('employeeForm').addEventListener('reset', () => {
+                                                if (editorInstance) {
+                                                    editorInstance.setData(''); // Clear CKEditor content
+                                                }
+                                            });
+                                        </script> *@
+                                      
                                     </div>
                                 </div>
                                 <div class="row pt-5">
@@ -409,6 +417,7 @@
                                 </div>
                               
                                 <div class="form-group pt-5 text-center">
+                                    <button type="reset" class="btn btn-danger">Reset</button>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
@@ -425,3 +434,22 @@
     <!--end::Post-->
 </div>
 <!--end::Content-->
+
+                                                   <script>             
+                                            let editorInstance;
+                                            ClassicEditor
+                                                .create(document.querySelector('#editor1'))
+                                                .then(editor1 => {
+                                                    editorInstance = editor1;
+                                                    console.log(editor1);
+                                                })
+                                                .catch(error => {
+                                                    console.error(error);
+                                                });
+                                            document.getElementById('employeeForm').addEventListener('reset', () => {
+                                                if (editorInstance) {
+                                                    editorInstance.setData(''); // Clear CKEditor content
+                                                }
+                                            });
+                                        </script>
+                                 

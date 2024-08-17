@@ -129,6 +129,22 @@
                 return false;
             }
         }
+        function validateDates() {
+            var assignDate = document.getElementById("Date").value;
+            var today = new Date();
+            var assignDateError = document.getElementById("DateError");
+
+            // Clear previous error messages
+            assignDateError.textContent = "";
+            dueDateError.textContent = "";
+
+            if (enteredDate < today) {
+                event.preventDefault(); // Prevent form submission
+                dateError.textContent = "The date cannot be before today's date.";
+            } else {
+                dateError.textContent = ""; // Clear any previous error messages
+            }
+        }
 //Edit ajax
     function OpenAddNotification(isEdit, notificationId) {
 

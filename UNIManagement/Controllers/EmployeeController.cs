@@ -55,6 +55,7 @@ namespace UNIManagement.Controllers
         /// Add Edit Condition of Employee
         /// </summary>
         /// <returns></returns>
+        
         public IActionResult AddEdit(EmployeeDetailsViewModel model)
         {
             if (_employeeRepository.isEmailExist(model.Email).Count > 0)
@@ -79,6 +80,7 @@ namespace UNIManagement.Controllers
         /// Get Employee Details BY EMployeeID
         /// </summary>
         /// <returns></returns>
+        [HttpGet, Route("employee/update/", Name = "EmployeeUpdate")]
         public IActionResult Update(int id)
         {
             var Employee = _employeeRepository.GetEmployeeDetails((int)id);

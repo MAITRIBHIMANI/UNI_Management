@@ -76,6 +76,8 @@ namespace UNIManagement.Controllers
         /// Add and Update Condition
         /// </summary>
         /// <returns></returns>
+       
+        [HttpPost]
         public IActionResult AddEdit(DomainViewModel model)
         {
             if (ModelState.IsValid)
@@ -85,6 +87,11 @@ namespace UNIManagement.Controllers
                 else
                     _domainRepository.AddDomain(model);
             }
+            else
+            {
+                return View("DomainForm");
+
+            }
 
             return RedirectToAction("Index");
         }
@@ -93,6 +100,8 @@ namespace UNIManagement.Controllers
         /// Get Client Details By CLientId
         /// </summary>
         /// <returns></returns>
+    
+        [HttpGet, Route("domain/update/", Name = "DomainUpdate")]
         public IActionResult Update(int id)
         {
             ViewBag.ClientDropDown = _clientRepository.GetClientList();

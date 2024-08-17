@@ -31,6 +31,7 @@ namespace UNIManagement.Repositories.Repository
                            on project.ProjectId equals projectWiseAttachment.ProjectId into ProjectGrop
                           from ProjectAttachment in ProjectGrop.DefaultIfEmpty()
                           where (project.IsDeleted == false)
+                          
                           select new ProjectDetailsViewModel
                           {
                               ProjectId = project.ProjectId,
@@ -40,7 +41,7 @@ namespace UNIManagement.Repositories.Repository
                               CommitmentDate = project.CommitmentDate,
                               IsActive = project.IsActive,
                               Document = ProjectAttachment.Document,
-                          }).OrderByDescending(x => x.Modified)
+                          })
                             .ToList();
 
             return result;
@@ -48,7 +49,6 @@ namespace UNIManagement.Repositories.Repository
 
         public List<ProjectDetailsViewModel> GetProjectListfilter(string filterprojectname, string filterbusinessnumber, DateTime? filterarrivaldate, string filterIsActive)
         {
-
             List<ProjectDetailsViewModel> projectList = (from project in _context.Projects
                                                          join projectWiseAttachment in _context.ProjectAttachments
                                                          on project.ProjectId equals projectWiseAttachment.ProjectId into ProjectGrop
@@ -63,12 +63,14 @@ namespace UNIManagement.Repositories.Repository
                                                              ProjectId = project.ProjectId,
                                                              Name = project.Name,
                                                              BusinessName = project.BusinessName,
+                                                             Document = ProjectAttachment.Document,
                                                              ArrivalDate = project.ArrivalDate,
                                                              CommitmentDate = project.CommitmentDate,
                                                              IsActive = project.IsActive,
-                                                             Document = ProjectAttachment.Document,                                                            
-                                                         }).OrderByDescending(x => x.Modified).ToList();
+                                                         }).ToList();
             return projectList;
+
+          
         }
 
         #endregion

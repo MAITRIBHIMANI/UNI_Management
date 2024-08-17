@@ -29,6 +29,7 @@ namespace UNIManagement.Repositories.Repository
         {
             return _context.Employees
                            .Where(x => x.IsDeleted == false)
+                           .OrderByDescending(x => x.Modified)
                            .Select(cont => new EmployeeViewModel()
                            {
                                EmployeeId = cont.EmployeeId,
@@ -294,10 +295,10 @@ namespace UNIManagement.Repositories.Repository
 
         #region check_email_exist_For_Employee
         /// <summary>
-        /// when new employee add  then check that mail is exit or not
+        /// when new employee add  then check that mail is exist or not
         /// </summary>
-        /// <param name="Email"></param>
         /// <returns></returns>
+        
         public List<Employee> isEmailExist(string Email)
         {
             List<Employee> data = _context.Employees.Where(e => e.Email.ToLower().Equals(Email.ToLower())).ToList();

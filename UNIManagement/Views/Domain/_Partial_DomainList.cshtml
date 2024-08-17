@@ -1,4 +1,5 @@
 ﻿@model List<UNIManagement.Entities.ViewModel.DomainViewModel>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!--begin::Table-->
 @if (Model.Count < 1)
 {
@@ -6,72 +7,85 @@
 }
 else
 {
-<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
-    <!--begin::Table head-->
-    <thead>
-        <!--begin::Table row-->
-        <tr class="fw-bolder fs-7 text-uppercase gs-0">
-            <th class="min-w-125px">No.</th>
-            <th class="min-w-125px">DomainName</th>
-            <th class="min-w-125px">DomainURL</th>
-            <th class="min-w-125px">PurchaseDate</th>
-            <th class="min-w-125px">Status</th>
-            <th class="text-center min-w-70px">Actions</th>
-        </tr>
-        <!--end::Table row-->
-    </thead>
-    <!--end::Table head-->
-    <!--begin::Table body-->
-     <tbody class="fw-bold text-gray-600">
-        @{
-            int i = 1;
-        }
-        @foreach (var b in Model)
-        {
-            <tr>
-                <td>@i</td>
-                <td>@b.Name</td>
-                <td>@b.Url</td>
-                <td>@Convert.ToDateTime(b.PurchaseDate).ToString("dd-MM-yyyy")</td>
-                <td>
-                    @if (b.IsActive == "false")
-                    {
-                        <span class="badge bg-danger">Disable</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-success">Active</span>
-                    }
-                </td>
+    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+        <!--begin::Table head-->
+        <thead>
+            <!--begin::Table row-->
+            <tr class="fw-bolder fs-7 text-uppercase gs-0">
+                <th class="min-w-125px">No.</th>
+                <th class="min-w-125px">DomainName</th>
+                <th class="min-w-125px">DomainURL</th>
+                <th class="min-w-125px">PurchaseDate</th>
+                <th class="min-w-125px">Status</th>
+                <th class="text-center min-w-70px">Actions</th>
+            </tr>
+            <!--end::Table row-->
+        </thead>
+        <!--end::Table head-->
+        <!--begin::Table body-->
+        <tbody class="fw-bold text-gray-600">
+            @{
+                int i = 1;
+            }
+            @foreach (var b in Model)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@b.Name</td>
+                    <td>
+                        @b.Url
+                        <a href="url" target="_blank" style="color: #7e8299">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5" />
+                                <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z" />
+                            </svg>
+                        </a>
+                    </td>
+                    <td>@Convert.ToDateTime(b.PurchaseDate).ToString("dd-MM-yyyy")</td>
+                    <td>
+                        @if (b.IsActive == "false")
+                        {
+                            <span class="badge bg-danger">Disable</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success">Active</span>
+                        }
+                    </td>
 
-                <td class="text-center">
-                    <a href="javascript:void(0);" class="view-domain" data-domain-id="@b.DomainId" aria-label="View Domain">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill text-primary" viewBox="0 0 16 16">
-                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
-                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
-                </svg>
-                </a> 
+                    <td class="text-center">
+                        <a href="javascript:void(0);" class="view-domain" data-domain-id="@b.DomainId" aria-label="View Domain">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-eye-fill text-primary" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                            </svg>
+                        </a>
 
-                    <a asp-controller="Domain" asp-action="Update" asp-route-id="@b.DomainId">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square text-success" viewBox="0 0 16 16">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-                        </svg>
-                    </a>
+                        <a asp-route="DomainUpdate" asp-route-id="@b.DomainId">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square text-success" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                            </svg>
+                        </a>
 
-                    <a asp-controller="Domain" asp-action="Delete" asp-route-id="@b.DomainId" onclick="return fun1();">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash  text-danger" viewBox="0 0 16 16">
-                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                        </svg>
-                    </a>
-                </td>
-              </tr>
-i++;
-        } 
-    </tbody> 
-    <!--end::Table body-->
-</table>
+                        <a href="javascript:void(0);"
+                           onclick="confirmDelete('@Url.Action("Delete", "Domain", new { id = b.DomainId })')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash  text-danger" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                            </svg>
+                        </a>
+
+
+                    
+
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+        <!--end::Table body-->
+    </table>
 }
 <!--end::Table-->
 
@@ -94,6 +108,33 @@ i++;
 
 
 <script>
+    function confirmDelete(deleteUrl) {
+        Swal.fire({
+            title: "Do you want to delete this Domain?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = deleteUrl;
+                Swal.fire({
+                    title: "Poof! Your domain has been deleted!",
+                    icon: "success",
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                Swal.fire({
+                    title: "Your Domain is Safe!",
+                    icon: 'info',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+    }
+
+
     //view js
     $(document).ready(function () {
 
@@ -104,10 +145,10 @@ i++;
         });
 
         function OpenViewModal(domainId) {
-            
+
             console.log(domainId);
             $.ajax({
-                
+
                 type: 'GET',
                 url: '@Url.Action("View", "Domain")',
                 data: { id: domainId },

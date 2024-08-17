@@ -1,5 +1,4 @@
 ﻿ @model UNIManagement.Entities.ViewModel.DomainViewModel;
-
 <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!--begin::Content-->
@@ -10,7 +9,7 @@
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-            <form asp-controller="Domain" asp-action="AddEdit" method="post">
+            <form id="domainForm" asp-controller="Domain" asp-action="AddEdit" method="post">
 
                 <div class="row pt-5">
                     <div class="col-md-12">
@@ -54,6 +53,7 @@
                                             <option><-- Select a Client --></option>
                                         </select> 
                                     <input type="hidden" asp-for="ClientName" id="clientName" />
+                                        <span asp-validation-for="ClientId" class="text-danger"></span>
                                   
                                     </div>
                                 </div>
@@ -94,31 +94,46 @@
                                 <div class="row pt-5">
                                     <div class="col-md-6">
                                         <label asp-for="Platform"></label>
-                                        <textarea type="text" id="editor" asp-for="Platform"></textarea>
-                                        <script>
-                                          
+                                        <textarea type="text" id="editor1" asp-for="Platform"></textarea>
+                                        <script>             
+                                            let editorInstance;
                                             ClassicEditor
-                                                .create(document.querySelector('#editor'))
+                                                .create(document.querySelector('#editor1'))
                                                 .then(editor1 => {
-                                                    console.log(editor);
+                                                    editorInstance = editor1;
+                                                    console.log(editor1);
                                                 })
                                                 .catch(error => {
                                                     console.error(error);
                                                 });
+                                            document.getElementById('domainForm').addEventListener('reset', () => {
+                                                if (editorInstance) {
+                                                    editorInstance.setData(''); // Clear CKEditor content
+                                                }
+                                            });
                                         </script>
+                                    
                                     </div>
                                     <div class="col-md-6">
                                         <label asp-for="CredentialDetails"></label>
                                         <textarea type="text" id="editor2" asp-for="CredentialDetails"></textarea>
+ 
                                         <script>
+                                            
                                             ClassicEditor
                                                 .create(document.querySelector('#editor2'))
                                                 .then(editor1 => {
+                                                      editorInstance = editor2;
                                                     console.log(editor2);
                                                 })
                                                 .catch(error => {
                                                     console.error(error);
                                                 });
+                                                 document.getElementById('domainForm').addEventListener('reset', () => {
+                                                if (editorInstance) {
+                                                    editorInstance.setData(''); // Clear CKEditor content
+                                                }
+                                            });
                                         </script>
 
 
@@ -130,7 +145,7 @@
                              
                                     <div class="col-md-6">
                                        <div class="form-check align-center" id="workshopcheckbox">
-        <input id="isworkshop" class="form-check-input" type="checkbox" asp-for="IsWorkshopPurchased" value="True">
+        <input id="isworkshop" class="form-check-input" type="checkbox" asp-for="IsWorkshopPurchased" value="True"/>
         <label class="form-check-label" for="isworkshop">
             Is Workshop Purchased
         </label>
@@ -160,21 +175,20 @@
                               
                                 <div class="row pt-5">                                    
                                     <div class="form-check">
-                                         @if (Model == null)
-                                        {
-                                            <input class="form-check-input" type="checkbox" value="" id="kt_check_indeterminate_1" value="True" asp-for="IsActive" checked />
-                                        }
-                                        else
-                                        {
-                                            <input class="form-check-input" type="checkbox" value="" id="kt_check_indeterminate_1" value="True" asp-for="IsActive" />
-                                        }
+                                        
+                                            <input class="form-check-input" type="checkbox" id="kt_check_indeterminate_1" value="" asp-for="IsActive" />
+                                       
                                         <label class="form-check-label" for="kt_check_indeterminate_1">
                                             Is Active
                                         </label>
                                     </div>
                                 </div>
                                 <div class="form-group mt-2 text-center">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button  type="reset" class="btn btn-danger">Reset</button>
+                                <button type="button" class="btn btn-primary" onclick="confirmEdit('@Model.Name')">Submit</button>
+
+                                   @* <button type="button" class="btn btn-primary" onclick="confirmEdit('@Model.Name')">Submit</button> *@
+                                    @* <button type="submit" class="btn btn-primary">Submit</button> *@
                                 </div>
                             </div>
                         </div>
@@ -190,6 +204,26 @@
 </div>
 <!--end::Content-->
 <script>
+    
+ 
+function confirmEdit(domainName) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: `You are about to edit the domain: ${domainName}.`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, edit it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // You can either navigate to the edit action or submit the form here
+            document.getElementById('domainForm').submit();
+        }
+    });
+}
+
+
   function fnSetClientName(element){
         console.log(element);
         document.getElementById("clientName").value = element.options[element.selectedIndex].text;

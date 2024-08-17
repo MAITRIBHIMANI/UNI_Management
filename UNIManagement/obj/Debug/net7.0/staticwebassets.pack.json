@@ -165,6 +165,10 @@
       "PackagePath": "staticwebassets\\Documents\\Client\\55\\Information.pdf"
     },
     {
+      "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Client\\56\\Information.pdf",
+      "PackagePath": "staticwebassets\\Documents\\Client\\56\\Information.pdf"
+    },
+    {
       "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Employee\\0\\png",
       "PackagePath": "staticwebassets\\Documents\\Employee\\0"
     },
@@ -893,6 +897,34 @@
       "PackagePath": "staticwebassets\\Documents\\Employee\\144\\Resume.pdf"
     },
     {
+      "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Employee\\145\\AdharCard.pdf",
+      "PackagePath": "staticwebassets\\Documents\\Employee\\145\\AdharCard.pdf"
+    },
+    {
+      "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Employee\\145\\Degree.pdf",
+      "PackagePath": "staticwebassets\\Documents\\Employee\\145\\Degree.pdf"
+    },
+    {
+      "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Employee\\145\\Image.jpg",
+      "PackagePath": "staticwebassets\\Documents\\Employee\\145\\Image.jpg"
+    },
+    {
+      "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Employee\\145\\Marksheet.pdf",
+      "PackagePath": "staticwebassets\\Documents\\Employee\\145\\Marksheet.pdf"
+    },
+    {
+      "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Employee\\145\\OtherDocument.pdf",
+      "PackagePath": "staticwebassets\\Documents\\Employee\\145\\OtherDocument.pdf"
+    },
+    {
+      "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Employee\\145\\Passbook.pdf",
+      "PackagePath": "staticwebassets\\Documents\\Employee\\145\\Passbook.pdf"
+    },
+    {
+      "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Employee\\145\\Resume.pdf",
+      "PackagePath": "staticwebassets\\Documents\\Employee\\145\\Resume.pdf"
+    },
+    {
       "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Employee\\77\\AdharCard.png",
       "PackagePath": "staticwebassets\\Documents\\Employee\\77\\AdharCard.png"
     },
@@ -1071,6 +1103,10 @@
     {
       "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Notification\\31\\Document.pdf",
       "PackagePath": "staticwebassets\\Documents\\Notification\\31\\Document.pdf"
+    },
+    {
+      "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Notification\\32\\Document.pdf",
+      "PackagePath": "staticwebassets\\Documents\\Notification\\32\\Document.pdf"
     },
     {
       "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Projct\\17\\dd.pdf",

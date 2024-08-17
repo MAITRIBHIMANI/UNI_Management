@@ -96,8 +96,7 @@ namespace UNIManagement.Controllers
         /// </summary>
         /// <returns></returns>
         public IActionResult View(int id)
-         {
-            
+         {            
             var Task = _taskRepository.GetTaskDetails(id);
             return PartialView("_TaskView", Task);
         }

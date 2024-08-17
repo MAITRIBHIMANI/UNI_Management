@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UNIManagement.Repositories")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e6738ef01d67b0ba36b4802010965133023b391c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0450937972fb51c7e333f880bb685bec232afd4f")]
 [assembly: System.Reflection.AssemblyProductAttribute("UNIManagement.Repositories")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UNIManagement.Repositories")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

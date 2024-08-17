@@ -10,7 +10,7 @@
             </div>
             <div class="row pt-2">
                 <label for="Date">Date</label>
-                <input asp-for="Date" type="date" class="form-control" id="Date" />
+                <input asp-for="Date" type="date" class="form-control" id="Date" onchange="validateDates()" />
                 <span class="text-danger"></span>
             </div>
             <div class="row pt-2">
@@ -56,6 +56,7 @@
             }
         });
     }
+  
 </script>
 @section Scripts {
 

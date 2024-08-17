@@ -28,6 +28,7 @@ namespace UNIManagement.Repositories.Repository
                           on task.ProjectId equals project.ProjectId into ProjectGroup
                           from proj in ProjectGroup.DefaultIfEmpty()
                           where task.IsDeleted == false
+                          orderby task.Modified descending
                           select new TaskViewModel
                           {
                               TaskId = task.TaskId,
@@ -50,6 +51,7 @@ namespace UNIManagement.Repositories.Repository
                                             join project in _context.Projects
                                             on task.ProjectId equals project.ProjectId into ProjectGroup
                                             from proj in ProjectGroup.DefaultIfEmpty()
+                                            orderby task.Modified descending
                                             where (task.IsDeleted == false
                                                  && (string.IsNullOrEmpty(filtertokennumber) || task.TokenNumber.ToLower().Contains(filtertokennumber.ToLower()))
                                                  && (string.IsNullOrEmpty(filtleremployeename) || emp.FirstName.ToLower().Contains(filtleremployeename.ToLower()))
