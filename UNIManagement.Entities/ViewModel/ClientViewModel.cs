@@ -51,7 +51,7 @@ namespace UNIManagement.Entities.ViewModel
         public bool? IsDeleted { get; set; }
 
         [Required]
-        public string? IsActive { get; set; } = "True";
+        public string? IsActive { get; set; }
     }
 
 }

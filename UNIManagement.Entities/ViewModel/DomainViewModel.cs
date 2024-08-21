@@ -29,7 +29,9 @@ namespace UNIManagement.Entities.ViewModel
         public string? Description { get; set; }
         [Required(ErrorMessage = "Client Name IS Required")]
         public string? ClientName {  get; set; }
-		public string IsActive { get; set; }
+		[Required]
+        public string? IsActive { get; set; } = "True";
+
         [Required(ErrorMessage = "Client Id Name IS Required")]
         public int? ClientId { get; set; }
     }

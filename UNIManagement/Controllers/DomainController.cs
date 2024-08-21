@@ -4,11 +4,13 @@ using System.Globalization;
 using UNIManagement.Entities.DataModels;
 using UNIManagement.Entities.ViewModel;
 using UNIManagement.Repositories.Repository.InterFace;
-
+using Newtonsoft.Json;
 namespace UNIManagement.Controllers
 {
     public class DomainController : BaseController
     {
+        private readonly HttpClient _httpClient;
+     
         #region Constructor
         private readonly IDomainRepository _domainRepository;
         private readonly IClientRepository _clientRepository;
@@ -16,7 +18,9 @@ namespace UNIManagement.Controllers
         {
             _domainRepository = domainRepository;
             _clientRepository = clientRepository;
+            _httpClient = new HttpClient();
         }
+       
         #endregion
 
         #region Index
@@ -30,7 +34,17 @@ namespace UNIManagement.Controllers
             return View();
         }
         #endregion
+        public async Task<IActionResult> Demo()
+        {
+            string url = "https://drive.google.com/drive/folders/1TaWsSc9BCa3dRh_0mSALhxSHZw3G753a"; // Replace with your Google Apps Script URL
+            var response = await _httpClient.GetStringAsync(url);
 
+           ViewBag.demo = response;
+            //var files = JsonConvert.DeserializeObject<List<GoogleDriveFile>>(response);
+
+            return View(response);
+
+        }
         #region Domain_List
         /// <summary>
         /// get list of all records and filtered record
@@ -77,7 +91,7 @@ namespace UNIManagement.Controllers
         /// </summary>
         /// <returns></returns>
        
-        [HttpPost]
+        
         public IActionResult AddEdit(DomainViewModel model)
         {
             if (ModelState.IsValid)
@@ -112,5 +126,11 @@ namespace UNIManagement.Controllers
      
         #endregion
 
+    }
+    public class GoogleDriveFile
+    {
+        public string Name { get; set; }
+        public string Url { get; set; }
+        public string MimeType { get; set; }
     }
 }

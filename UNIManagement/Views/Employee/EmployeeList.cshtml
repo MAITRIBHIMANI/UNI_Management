@@ -66,6 +66,9 @@
                                 </div>
                             </div>
                             <div class="row pt-5">
+                                <div id="loadercontainer">
+                                    <span class="loader" id="loader-list"></span>
+                                </div>
                                 <div id="EmployeeListPartialView">
                                 </div>
                             </div>
@@ -79,15 +82,7 @@
 </div>
 @section Scripts {
     <script>
-        //delete pop up
-        function fun1() {
-            if (confirm("Are you sure you want to delete?")) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
+     
         //filter button
         document.getElementById('filterButton').addEventListener('click', function () {
             var filterCard = document.getElementById('filterCard');
@@ -105,13 +100,13 @@
         }
        //filtered data ajax
         function filterEmployeeList() {
-            
+            $('#loader-list').show();
             $.ajax({
                 type: 'GET',
                 url: '/Employee/GetEmployeeList',
                 data: $("#employeeformfilter").serializeArray(),
                 success: function (response) {
-                    
+                    $('#loader-list').hide();
                     $('#EmployeeListPartialView').html(response);
                 },
                 error: function (req, status, err) {

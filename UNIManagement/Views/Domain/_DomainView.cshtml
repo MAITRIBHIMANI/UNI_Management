@@ -2,15 +2,69 @@
  @using System.Net
 
 <div class="text-start">
-    <p>DomainId : @Model.DomainId</p>
-    <p>DomainName : @Model.Name</p>
-    <p>Url : @Model.Url</p>
-    <p>PurchaseDate : @Model.PurchaseDate</p>
-    <p>RenewalDuration : @Model.RenewDuration</p>
-    <p>Platform : @Html.Raw(WebUtility.HtmlDecode(Model.Platform)) </p> 
-    <p>CredentialDetails :  @Html.Raw(WebUtility.HtmlDecode(Model.CredentialDetails))</p>
-    <p>IsWorkShopPurchased : @Model.IsWorkshopPurchased</p>
-    <p>WorkShopPurchasedDate : @Model.WorkspacePurchaseDate </p>
-    <p>WorkShopRenewalDuration : @Model.WorkshpaceRenewDuration</p>
-    <p>IsActive : @Model.IsActive</p>
+
+    <label class="d-flex align-items-center fs-5 fw-semibold mb-4 pt-5">
+        <h4 class="text-decoration-underline mb-0">Domain Details</h4>
+
+        @if (Model.IsActive == "false")
+        {
+            <span class="badge bg-danger ms-auto">Disable</span>
+        }
+        else
+        {
+            <span class="badge bg-success ms-auto">Active</span>
+        }
+    </label>
+
+    <div class="row pt-2">
+        <div class="col-md-6">
+            <b>Name : </b>@Model.Name
+        </div>
+        <div class="col-md-6">
+            <b>URL : </b> @Model.Url
+            <a href="url" target="_blank" style="color: #7e8299">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5" />
+                    <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z" />
+                </svg>
+            </a>
+
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-md-6">
+            <b>Purchase Date : </b>@Convert.ToDateTime(Model.PurchaseDate).ToString("dd-MM-yyyy")
+        </div>
+        <div class="col-md-6">
+            <b>Renewa lDuration : </b> @Model.RenewDuration
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-md-6">
+            <b>Client Name</b> : @Model.ClientName
+        </div>
+    </div>
+    <label class="d-flex align-items-center fs-5 fw-semibold mb-4 pt-5">
+        <span class="">
+            <h4 class="text-decoration-underline">Workspace Details</h4>
+        </span>
+    </label>
+    <div class="row">
+        <div>
+            <b>IsWorkShopPurchased : </b> @Model.IsWorkshopPurchased
+        </div>
+    </div>
+
+    @if (Model.IsWorkshopPurchased == "True")
+    {
+        <div class="row pt-2">
+            <div class="col-md-12">
+                <b>Purchase Date : </b>@Convert.ToDateTime(Model.WorkspacePurchaseDate).ToString("dd-MM-yyyy")
+            </div>
+            <div class="col-md-12 pt-2">
+                <b>Renew  Duration : </b> @Model.WorkshpaceRenewDuration
+            </div>
+        </div>
+    }
+   
 </div>

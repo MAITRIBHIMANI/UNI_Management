@@ -87,6 +87,11 @@
 
                             </div>
                             <div class="row pt-5">
+
+                                <div id="loadercontainer">
+                                    <span class="loader" id="loader-list"></span>
+                                </div>
+
                                 <div id="TaskListPartialView">
                                 </div>
                             </div>                           
@@ -133,12 +138,14 @@
         //filtering data ajax
         function filterTaskList() {
             console.log($("#taskformfilter").serializeArray());
+            $('#loader-list').show();
             $.ajax({
                 type: 'GET',
                 url: '/Task/GetTaskList',
                 data: $("#taskformfilter").serializeArray(),
 
                 success: function (response) {
+                    $('#loader-list').hide();
                     $('#TaskListPartialView').html(response);
                     
 

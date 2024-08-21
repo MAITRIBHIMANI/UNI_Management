@@ -2,15 +2,58 @@
  @using System.Net
 
 <div class="text-start">
-    <p>ClientId : @Model.ClientId</p>
-    <p>Name : @Model.Name</p>
-    <p>Number : @Model.Number</p>
-    <p>Email : @Model.Email</p>
-    <p>BirthDate : @Model.BirthDate</p>
-    <p>Address : @Model.Address</p>
-    <p>BusinessName : @Model.BusinessName</p>
-    <p>BusinessNumber : @Model.BusinessNumber</p>
-    <p>Category : @Model.Category</p>
-    <p>AdditionalInformation : <img src="~/Client/AdditionalInformation/@Model.ClientId.@Model.AdditionInformation" /> </p>
-    <p>RefferenceDetails :  @Html.Raw(WebUtility.HtmlDecode(Model.RefferenceDetails)) </p>
+    <label class="d-flex align-items-center fs-5 fw-semibold mb-4 pt-5">
+        <h4 class="text-decoration-underline mb-0">Client Details</h4>
+
+        @if (Model.IsActive == "false")
+        {
+            <span class="badge bg-danger ms-auto">Disable</span>
+        }
+        else
+        {
+            <span class="badge bg-success ms-auto">Active</span>
+        }
+    </label>
+    <div class="row pt-2">
+        <div class="col-md-6">
+            <b>Name : </b>@Model.Name
+        </div>
+        </div>
+        <div class="row pt-2">
+        <div class="col-md-6">
+            <b>Number : </b> @Model.Number    
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-md-12">
+            <b>Email : </b>@Model.Email
+        </div>
+       
+    </div>
+    <div class="row pt-2">
+        <div class="col-md-12">
+            <b>BirthDate : </b>@Convert.ToDateTime(Model.BirthDate).ToString("dd-MM-yyyy")
+        </div>
+    </div>
+    <div class="row pt-2">
+        <div class="col-md-12">
+            <b>Address : </b>@Model.Address
+        </div>       
+    </div>   
+    <label class="d-flex align-items-center fs-5 fw-semibold mb-4 pt-5">
+        <h4 class="text-decoration-underline mb-0">Business Details</h4>        
+    </label>
+    <div class="row">
+        <div class="col-md-6">
+            <b>BusinessName : </b>@Model.BusinessName
+        </div>
+        <div class="col-md-6">
+            <b>BusinessNumber : </b>@Model.BusinessNumber
+        </div>
+</div>
+    <div class="row">
+        <div class="col-md-6">
+            <b>Category : </b>@Model.Category
+        </div>      
+    </div>    
 </div>

@@ -105,7 +105,7 @@ else
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="AddModalLabel">Add Notification</h5>
+                <h2 class="modal-title" id="AddModalLabel">Details Of Client</h2>
                 <button type="button" class="close" id="closeModal" aria-label="Close" data-bs-dismiss="modal">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -131,11 +131,14 @@ else
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = deleteUrl;
                 Swal.fire({
                     title: "Poof! Your client has been deleted!",
-                    icon: "success",
+                    icon: 'success',
                     confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = deleteUrl;
+                    }
                 });
             } else {
                 Swal.fire({

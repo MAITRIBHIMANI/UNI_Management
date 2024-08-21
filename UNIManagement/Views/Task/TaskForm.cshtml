@@ -65,14 +65,7 @@
                                         <label>Task Description</label>
                                         <textarea type="text" id="editor1" asp-for="Description"></textarea>
                                         <script>
-                                            ClassicEditor
-                                                .create(document.querySelector('#editor1'))
-                                                .then(editor1 => {
-                                                    console.log(editor1);
-                                                })
-                                                .catch(error => {
-                                                    console.error(error);
-                                                });
+                                           
                                         </script>
                                     </div>
 
@@ -128,6 +121,7 @@
                              
                             </div>
                             <div class="form-group mt-2 text-center">
+                                <button type="reset" id="resetButton" class="btn btn-danger">Reset</button>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
@@ -143,6 +137,33 @@
 </div>
 <!--end::Content-->
 <script>
+     $(document).ready(function () {
+        // Initialize CKEditors
+        let editor1;
+        ClassicEditor
+            .create(document.querySelector('#editor1'))
+            .then(editor => {
+                editor1 = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+     
+       
+        $('#resetButton').on('click', function () {
+            // Clear CKEditor data
+            if (editor1) editor1.setData('');
+
+        });
+        // Toggle the workshop section based on checkbox status
+        $("#isworkshop").click(function () {
+            if ($(this).is(":checked")) {
+                $("#answer").show();
+            } else {
+                $("#answer").hide();
+            }
+        });
+    });
     //fill dropdown projectname and employeename
     function fnSetProjectName(element){
         console.log(element);

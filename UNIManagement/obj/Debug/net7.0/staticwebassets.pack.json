@@ -169,6 +169,18 @@
       "PackagePath": "staticwebassets\\Documents\\Client\\56\\Information.pdf"
     },
     {
+      "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Client\\57\\Information.pdf",
+      "PackagePath": "staticwebassets\\Documents\\Client\\57\\Information.pdf"
+    },
+    {
+      "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Client\\60\\Information.pdf",
+      "PackagePath": "staticwebassets\\Documents\\Client\\60\\Information.pdf"
+    },
+    {
+      "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Client\\61\\Information.pdf",
+      "PackagePath": "staticwebassets\\Documents\\Client\\61\\Information.pdf"
+    },
+    {
       "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\Documents\\Employee\\0\\png",
       "PackagePath": "staticwebassets\\Documents\\Employee\\0"
     },
@@ -5999,6 +6011,10 @@
     {
       "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\assets\\media\\illustrations\\unitedpalms-1\\9.png",
       "PackagePath": "staticwebassets\\assets\\media\\illustrations\\unitedpalms-1\\9.png"
+    },
+    {
+      "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\assets\\media\\logos\\Unique it logo.png",
+      "PackagePath": "staticwebassets\\assets\\media\\logos\\Unique it logo.png"
     },
     {
       "Id": "E:\\Asp.net Projects\\UNIManagement\\UNIManagement\\wwwroot\\assets\\media\\logos\\favicon.ico",
