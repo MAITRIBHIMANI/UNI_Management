@@ -243,7 +243,7 @@
 
                 $(document).click(function (event) {
                     if (!$(event.target).closest('.atte').length) {
-                        $('.dropdown-content').remove();
+                        $('.dropdowndata').remove();
                     }
                 });
             }
@@ -256,29 +256,29 @@
             function showDropdown(cell, index, month, year, status) {
 
                 // Remove any existing dropdowns
-                $('.dropdown-content').remove();
-
+                $('.dropdowndata').remove();
+                debugger
                 // Create the dropdown menu
-                let dropdown = `<div class="dropdown-content">
-                                                    <a href="#" class="dropdown" data-value="1" >Present</a>
-                                                                <a href="#" class="dropdown" data-value="2" >Absent</a>
-                                                                <a href="#" class="dropdown" data-value="3" >Half Leave</a>
-                                       </div>`;
+                let dropdown = `<div class="dropdown"> <div class="dropdowndata" style="display: none; position: absolute;">
+            <a href="#" class="drp" data-value="1">Present</a>
+            <a href="#" class="drp" data-value="2">Absent</a>
+            <a href="#" class="drp" data-value="3">Half Leave</a>
+          </div></div>`;
 
                 // Append the dropdown to the cell
                 $(cell).append(dropdown);
 
                 // Show the dropdown
-                $(cell).find('.dropdown-content').show();
+                $(cell).find('.dropdowndata').show();
 
                 // Handle dropdown item click
-                $('.dropdown').click(function (event) {
+                $('.drp').click(function (event) {
                     event.preventDefault();
                     let status = $(this).text();
                     let value = $(this).data('value');
                     console.log('Status:', status);
                     $(this).closest('td').text(status); // Optionally, replace cell content with status
-                    $('.dropdown-content').remove(); // Remove the dropdown
+                    $('.dropdowndata').remove(); // Remove the dropdown
 
 
                     $.ajax({
@@ -293,7 +293,7 @@
                         success: function (response) {
                             console.log(data);
 
-                            $('.dropdown-content').remove(); // Remove the dropdown
+                            $('.dropdowndata').remove(); // Remove the dropdown
                         },
                         error: function (error) {
                             console.error('Error:', error);

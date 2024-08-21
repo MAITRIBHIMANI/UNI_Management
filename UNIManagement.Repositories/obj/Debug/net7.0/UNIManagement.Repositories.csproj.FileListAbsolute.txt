@@ -60,10 +60,10 @@ E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UN
 E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.AssemblyInfoInputs.cache
 E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.AssemblyInfo.cs
 E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.csproj.CoreCompileInputs.cache
+E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.sourcelink.json
 E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManag.3E552142.Up2Date
 E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.dll
 E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\refint\UNIManagement.Repositories.dll
 E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.pdb
 E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.genruntimeconfig.cache
 E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\ref\UNIManagement.Repositories.dll
-E:\Asp.net Projects\UNIManagement\UNIManagement.Repositories\obj\Debug\net7.0\UNIManagement.Repositories.sourcelink.json

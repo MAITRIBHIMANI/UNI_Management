@@ -49,9 +49,9 @@ E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIMan
 E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.AssemblyInfoInputs.cache
 E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.AssemblyInfo.cs
 E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.csproj.CoreCompileInputs.cache
+E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.sourcelink.json
 E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.dll
 E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\refint\UNIManagement.Entities.dll
 E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.pdb
 E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.genruntimeconfig.cache
 E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\ref\UNIManagement.Entities.dll
-E:\Asp.net Projects\UNIManagement\UNIManagement.Entities\obj\Debug\net7.0\UNIManagement.Entities.sourcelink.json

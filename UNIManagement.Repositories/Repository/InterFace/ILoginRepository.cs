@@ -14,6 +14,6 @@ namespace UNIManagement.Repositories.Repository.InterFace
         /// 
         /// </summary>
         /// <returns></returns>
-        Employee GetUser(string email, string password);
+        bool GetUser(string email, string password);
     }
 }

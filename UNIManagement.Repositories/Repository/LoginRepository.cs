@@ -8,7 +8,7 @@ using UNIManagement.Entities.DataContext;
 using UNIManagement.Entities.DataModels;
 using UNIManagement.Entities.ViewModel;
 using UNIManagement.Repositories.Repository.InterFace;
-
+using Microsoft.AspNetCore.Http;
 namespace UNIManagement.Repositories.Repository
 {
     public class LoginRepository : ILoginRepository
@@ -20,9 +20,14 @@ namespace UNIManagement.Repositories.Repository
             _context = context;
         }
         #endregion
-        public Employee GetUser(string email, string password)
+        public bool GetUser(string email, string password)
         {
-            return _context.Employees.FirstOrDefault(e => e.Email == email && e.Password == password);
+            var user = _context.Employees
+           .FirstOrDefault(e => e.Email == email && e.Password == password);
+
+            return user != null;
+           
+
         }
     }
 }

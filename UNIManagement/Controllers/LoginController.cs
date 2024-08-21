@@ -22,17 +22,33 @@ namespace UNIManagement.Controllers
         {
             return View();
         }
-        #endregion           
+        #endregion
 
-        #region Login 
+
+        [HttpPost]
         public IActionResult userLogin(User modal)
         {
-            var employee = _loginRepository.GetUser(modal.Email, modal.Password);
-         
-            if (employee != null)
-                return RedirectToAction("Index", "Home");
-            else
-                return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                bool isUser = _loginRepository.GetUser(modal.Email, modal.Password);
+                if (isUser)
+                {
+                    HttpContext.Session.SetString("Email", modal.Email);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    
+                }
+            }
+            return View("Index");
+        }
+        #region Logout
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index");
         }
         #endregion
 
